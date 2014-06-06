@@ -344,7 +344,11 @@ SparseMatrix<T>::parallel_multiply (SparseMatrix const& rhs) const
         thread_inner.reserve(nnz / num_chunks);
 
 #pragma omp for ordered schedule(static, 1)
+#if !defined(_MSC_VER)
         for (std::size_t chunk = 0; chunk < num_chunks; ++chunk)
+#else
+        for (int64_t chunk = 0; chunk < num_chunks; ++chunk)
+#endif
         {
             thread_inner.clear();
             thread_values.clear();

@@ -369,7 +369,11 @@ import_bundle_nvm_or_colmap (AppSettings const& conf, bool load_nvm = true)
     /* Create and write views. */
     std::cout << "Writing MVE views..." << std::endl;
 #pragma omp parallel for schedule(dynamic, 1)
+#if !defined(_MSC_VER)
     for (std::size_t i = 0; i < cameras.size(); ++i)
+#else
+    for (int64_t i = 0; i < cameras.size(); ++i)
+#endif
     {
         mve::CameraInfo& mve_cam = cameras[i];
         mve::AdditionalCameraInfo const& cam_info = cam_infos[i];
@@ -654,7 +658,11 @@ import_bundle_noah_ps (AppSettings const& conf)
     num_valid_cams = 0;
 
     #pragma omp parallel for
+#if !defined(_MSC_VER)
     for (std::size_t i = 0; i < cams.size(); ++i)
+#else
+    for (int64_t i = 0; i < cams.size(); ++i)
+#endif
     {
         /*
          * For each camera in the bundle file, a new view is created.
@@ -1005,7 +1013,11 @@ import_images (AppSettings const& conf)
     std::atomic_int id_cnt(max_scene_id + 1);
     std::atomic_int num_imported(0);
 #pragma omp parallel for ordered schedule(dynamic,1)
+#if !defined(_MSC_VER)
     for (std::size_t i = 0; i < dir.size(); ++i)
+#else
+    for (int64_t i = 0; i < dir.size(); ++i)
+#endif
     {
         if (dir[i].is_dir)
         {

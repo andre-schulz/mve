@@ -8,7 +8,7 @@ set(LIBPNG_FILENAME "lpng1621.zip")
 set(ZLIB_FILENAME "zlib128.zip")
 set(LIBTIFF_FILENAME "tiff-4.0.4.zip")
 set(GLEW_FILENAME "glew-1.12.0.zip")
-set(QT5_FILENAME "qt-everywhere-opensource-src-5.5.1.zip")
+set(QT5_FILENAME "qt-everywhere-opensource-src-5.5.1.7z")
 set(GTEST_FILENAME "release-1.7.0.zip")
 
 set(LIBJPEG_URL "http://www.ijg.org/files/${LIBJPEG_FILENAME}")
@@ -16,7 +16,7 @@ set(LIBPNG_URL "https://download.sourceforge.net/libpng/${LIBPNG_FILENAME}")
 set(ZLIB_URL "https://download.sourceforge.net/libpng/${ZLIB_FILENAME}")
 set(LIBTIFF_URL "http://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
 set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/1.12.0/${GLEW_FILENAME}")
-set(QT5_URL "https://download.qt-project.org/official_releases/qt/5.5/5.5.1/single/${QT5_FILENAME}")
+set(QT5_URL "https://download.qt.io/archive/qt/5.5/5.5.1/single/${QT5_FILENAME}")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
 
 set(PATCHES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/patches")
@@ -127,7 +127,7 @@ ExternalProject_Add(glew
 ExternalProject_Add(qt5
     PREFIX qt5
     URL ${QT5_URL}
-    URL_HASH SHA256=e42db1b07b4a74e3de4649e9e2cfb59f147bb1eb7a575c2c908ec0fda854ef94
+    URL_HASH SHA256=eb7c430f9f73d8f9d1a0d328e8a77549ffcf3b9915bee0c3dd6ae9ceffb86ef9
     CONFIGURE_COMMAND
         cmd /C configure -debug-and-release -opensource -confirm-license -shared
                 -no-audio-backend -mp -opengl desktop -skip qt3d -skip qtactiveqt

@@ -26,21 +26,18 @@ set(UMVE_LIBS
     mve_sfm
 )
 
-if(WIN32)
-    find_package(GLEW REQUIRED)
-    include_directories(${GLEW_INCLUDE_DIRS})
-    set(UMVE_LIBS ${UMVE_LIBS} ${GLEW_LIBRARIES})
-endif()
-include_directories(.)
-
 qt5_wrap_cpp(HEADERS_MOC ${HEADERS})
 qt5_add_resources(RESOURCES_RCC umve.qrc)
 
 add_executable(umve ${SOURCES} ${HEADERS_MOC} ${RESOURCES_RCC})
 set_target_properties(umve PROPERTIES ENABLE_EXPORTS TRUE)
-target_link_libraries(umve
-    ${UMVE_LIBS}
-)
+target_include_directories(umve PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(umve PUBLIC ${UMVE_LIBS})
+
+if(WIN32)
+    find_package(GLEW REQUIRED)
+    target_link_libraries(umve PUBLIC GLEW::GLEW)
+endif()
 
 add_subdirectory(plugins)
 

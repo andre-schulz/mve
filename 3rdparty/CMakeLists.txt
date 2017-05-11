@@ -91,11 +91,11 @@ ExternalProject_Add(libtiff
     BUILD_IN_SOURCE 1)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug"
-        OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo"
-        OR NOT CMAKE_BUILD_TYPE)
+        OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     set(VS_CONFIG "Debug")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release"
-        OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+        OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel"
+        OR NOT CMAKE_BUILD_TYPE)
     set(VS_CONFIG "Release")
 endif()
 

@@ -51,7 +51,6 @@ MainWindow::MainWindow (void)
     this->dock_scene = new QDockWidget(tr("Scene"));
     this->dock_scene->setWidget(this->scene_overview);
     //this->dock_scene->setSizeHint(175, 0);
-    //this->dock_log = new QDockWidget(tr("Log"), this);
 
     this->dock_jobs = new QDockWidget(tr("Jobs"));
     this->dock_jobs->setWidget(this->jobqueue);
@@ -71,7 +70,6 @@ MainWindow::MainWindow (void)
     this->setCentralWidget(central_widget);
     this->addDockWidget(Qt::LeftDockWidgetArea, this->dock_scene);
     this->addDockWidget(Qt::LeftDockWidgetArea, this->dock_jobs);
-    //this->addDockWidget(Qt::BottomDockWidgetArea, this->dock_log);
     this->enable_scene_actions(false);
     this->resize(1024, 768);
 
@@ -155,8 +153,10 @@ MainWindow::load_file (const std::string& filename)
 {
     try
     {
-        std::string ext4 = util::string::right(filename, 4);
-        std::string ext5 = util::string::right(filename, 5);
+        std::string ext4 = util::string::lowercase(
+            util::string::right(filename, 4));
+        std::string ext5 = util::string::lowercase(
+            util::string::right(filename, 5));
         if (ext4 == ".off" || ext4 == ".ply" || ext4 == ".obj")
         {
             this->tab_sceneinspect->load_file(filename);
@@ -296,6 +296,7 @@ MainWindow::create_menus (void)
 
     this->menuBar()->addMenu(this->menu_scene);
     this->menuBar()->addMenu(this->menu_help);
+    this->menuBar()->show();
 
     this->scene_overview->add_toolbar_action(this->action_open_scene);
     this->scene_overview->add_toolbar_action(this->action_reload_scene);

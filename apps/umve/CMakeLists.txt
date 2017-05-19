@@ -1,7 +1,7 @@
 file (GLOB HEADERS "*.h" "viewinspect/*.h" "scene_inspect/*.h" "scene_addins/*.h")
 file (GLOB SOURCES "*.cc" "viewinspect/*.cc" "scene_inspect/*.cc" "scene_addins/*.cc")
 
-set(UMVE_QT_COMPONENTS Core Gui OpenGL Svg Widgets)
+set(UMVE_QT_COMPONENTS Concurrent Core Gui OpenGL Svg Widgets)
 find_package(OpenGL REQUIRED)
 find_package(Qt5 QUIET COMPONENTS ${UMVE_QT_COMPONENTS})
 if(NOT Qt5_FOUND)

@@ -41,14 +41,15 @@ ExternalProject_Add(libjpeg
     PREFIX build/libjpeg
     URL ${LIBJPEG_URL}
     URL_HASH SHA256=d98f2a927bd17a58fe14781ec7957b5d514a8e5f04c0d071e65b967bf34e19d4
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CONFIGURE_COMMAND nmake /f makefile.vc setup-v10
     BUILD_COMMAND nmake /f makefile.vc
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jconfig.h ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jerror.h   ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jmorecfg.h ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jpegint.h  ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jpeglib.h  ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/libjpeg.lib  ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jconfig.h <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jerror.h   <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jmorecfg.h <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jpegint.h  <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jpeglib.h  <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/libjpeg.lib  <INSTALL_DIR>/lib
     BUILD_IN_SOURCE 1)
 ExternalProject_Add_Step(libjpeg copy_win32_mak
     COMMAND ${CMAKE_COMMAND} -E copy ${WIN32_MAK_LOCATION} <SOURCE_DIR>
@@ -59,9 +60,10 @@ ExternalProject_Add(zlib
     PREFIX build/zlib
     URL ${ZLIB_URL}
     URL_HASH SHA256=879d73d8cd4d155f31c1f04838ecd567d34bebda780156f0e82a20721b3973d5
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:STRING=${CMAKE_CURRENT_SOURCE_DIR}
+        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>
     BUILD_IN_SOURCE 1)
 
 ExternalProject_Add(libpng
@@ -69,9 +71,10 @@ ExternalProject_Add(libpng
     PREFIX build/libpng
     URL ${LIBPNG_URL}
     URL_HASH SHA256=1e4055c290992e0edf5045b1f78585a026d96f71ad706d6bda290cd9a181f4af
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:STRING=${CMAKE_CURRENT_SOURCE_DIR}
+        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>
         -DZLIB_ROOT:STRING=${CMAKE_CURRENT_SOURCE_DIR}
     BUILD_IN_SOURCE 1)
 
@@ -79,16 +82,17 @@ ExternalProject_Add(libtiff
     PREFIX build/libtiff
     URL ${LIBTIFF_URL}
     URL_HASH SHA256=4fec3abf1c79b000805446235fecc6b5a764527c5fe30e1f707b251a8720fce3
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CONFIGURE_COMMAND ""
     BUILD_COMMAND nmake /f Makefile.vc lib
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffconf.h ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiff.h     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffio.h   ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffio.hxx ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffvers.h ${CMAKE_CURRENT_SOURCE_DIR}/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff.lib   ${CMAKE_CURRENT_SOURCE_DIR}/lib
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff_i.lib ${CMAKE_CURRENT_SOURCE_DIR}/lib
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff.dll ${CMAKE_CURRENT_SOURCE_DIR}/bin
+    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffconf.h <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiff.h     <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffio.h   <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffio.hxx <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffvers.h <INSTALL_DIR>/include
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff.lib   <INSTALL_DIR>/lib
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff_i.lib <INSTALL_DIR>/lib
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff.dll <INSTALL_DIR>/bin
     BUILD_IN_SOURCE 1)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug"
@@ -116,41 +120,45 @@ ExternalProject_Add(glew
     PREFIX build/glew
     URL ${GLEW_URL}
     URL_HASH SHA256=6f1083eb034efbc3b2017ef052d58f3e9bd70963ec2acd26b3d59231ee1633d4
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CONFIGURE_COMMAND ""
     PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${PATCHES_DIR}/glew.rc build
     BUILD_COMMAND cd build/vc12
         COMMAND msbuild glew.sln /m /p:Configuration=${VS_CONFIG} /p:Platform=${VS_PLATFORM} /p:PlatformToolset=${VS_PLATFORM_TOOLSET}
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/glew/src/glew/include ${CMAKE_CURRENT_SOURCE_DIR}/include
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/glew/src/glew/lib/${VS_CONFIG}/${VS_PLATFORM}/glew32s.lib ${CMAKE_CURRENT_SOURCE_DIR}/lib
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/glew/src/glew/bin/${VS_CONFIG}/${VS_PLATFORM} ${CMAKE_CURRENT_SOURCE_DIR}/bin
+    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/glew/src/glew/include <INSTALL_DIR>/include
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/glew/src/glew/lib/${VS_CONFIG}/${VS_PLATFORM}/glew32s.lib <INSTALL_DIR>/lib
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/glew/src/glew/bin/${VS_CONFIG}/${VS_PLATFORM} <INSTALL_DIR>/bin
     BUILD_IN_SOURCE 1)
 
 ExternalProject_Add(qt5
     PREFIX qt5
     URL ${QT5_URL}
     URL_HASH SHA256=eb7c430f9f73d8f9d1a0d328e8a77549ffcf3b9915bee0c3dd6ae9ceffb86ef9
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CONFIGURE_COMMAND
-        cmd /C configure -debug-and-release -opensource -confirm-license -shared
-                -no-audio-backend -mp -opengl desktop -skip qt3d -skip qtactiveqt
-                -skip qtandroidextras -skip qtcanvas3d -skip qtconnectivity
-                -skip qtdeclarative -skip qtdoc -skip qtenginio
-                -skip qtgraphicaleffects -skip qtlocation -skip qtmultimedia
-                -skip qtquick1 -skip qtquickcontrols -skip qtscript
-                -skip qtsensors -skip qtserialport -skip qttools
-                -skip qttranslations -skip qtwayland -skip qtwebchannel
-                -skip qtwebkit -skip qtwebkit-examples -skip qtwebsockets
-                -nomake examples -no-compile-examples
+        cmd /C configure -prefix "<INSTALL_DIR>" -debug-and-release -opensource
+            -confirm-license -shared -no-audio-backend -mp -opengl desktop
+            -skip qt3d -skip qtactiveqt -skip qtandroidextras
+            -skip qtcanvas3d -skip qtconnectivity -skip qtdeclarative
+            -skip qtdoc -skip qtenginio -skip qtgraphicaleffects
+            -skip qtlocation -skip qtmultimedia -skip qtquick1
+            -skip qtquickcontrols -skip qtscript -skip qtsensors
+            -skip qtserialport -skip qttools -skip qttranslations
+            -skip qtwayland -skip qtwebchannel -skip qtwebkit
+            -skip qtwebkit-examples -skip qtwebsockets
+            -nomake examples -no-compile-examples
     BUILD_COMMAND nmake
     BUILD_IN_SOURCE 1
-    INSTALL_COMMAND "")
+    INSTALL_COMMAND nmake install)
 
 ExternalProject_Add(gtest
     PREFIX build/gtest
     URL ${GTEST_URL}
     URL_HASH SHA256=b58cb7547a28b2c718d1e38aee18a3659c9e3ff52440297e965f5edffe34b6d0
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/include ${CMAKE_CURRENT_SOURCE_DIR}/include
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/${CMAKE_BUILD_TYPE} ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/include <INSTALL_DIR>/include
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/${CMAKE_BUILD_TYPE} <INSTALL_DIR>/lib
     BUILD_IN_SOURCE 1)
 

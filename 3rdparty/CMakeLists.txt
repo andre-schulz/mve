@@ -29,12 +29,13 @@ message("Forcing build type to \"Release\"")
 message("Reminder: Select Release configuration in Visual Studio before building")
 set(CMAKE_BUILD_TYPE Release CACHE STRING "")
 
+set(PFx86 "ProgramFiles(x86)")
 find_file(WIN32_MAK_LOCATION win32.mak
     DOC "Location of win32.mak"
     PATHS
-        "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.0A\\Include"
-        "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1\\Include"
-        "C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v7.1A\\Include"
+        "$ENV{${PFx86}}\\Microsoft SDKs\\Windows\\v7.0A\\Include"
+        "$ENV{${PFx86}}\\Microsoft SDKs\\Windows\\v7.1\\Include"
+        "$ENV{${PFx86}}\\Microsoft SDKs\\Windows\\v7.1A\\Include"
         ENV Path)
 ExternalProject_Add(libjpeg
     PREFIX build/libjpeg

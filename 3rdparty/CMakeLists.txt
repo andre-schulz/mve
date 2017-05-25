@@ -63,8 +63,7 @@ ExternalProject_Add(zlib
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>
-    BUILD_IN_SOURCE 1)
+        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>)
 
 ExternalProject_Add(libpng
     DEPENDS zlib
@@ -74,8 +73,7 @@ ExternalProject_Add(libpng
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>
-    BUILD_IN_SOURCE 1)
+        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>)
 
 ExternalProject_Add(libtiff
     PREFIX build/libtiff
@@ -158,6 +156,5 @@ ExternalProject_Add(gtest
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/include <INSTALL_DIR>/include
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/${CMAKE_BUILD_TYPE} <INSTALL_DIR>/lib
-    BUILD_IN_SOURCE 1)
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/${CMAKE_BUILD_TYPE} <INSTALL_DIR>/lib)
 

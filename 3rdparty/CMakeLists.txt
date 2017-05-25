@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
+set(CMAKE_CONFIGURATION_TYPES Release)
 
 project(3rdparty)
 include(ExternalProject)
@@ -24,10 +25,6 @@ set(PATCHES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/patches")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
-
-message("Forcing build type to \"Release\"")
-message("Reminder: Select Release configuration in Visual Studio before building")
-set(CMAKE_BUILD_TYPE Release CACHE STRING "")
 
 set(PFx86 "ProgramFiles(x86)")
 find_file(WIN32_MAK_LOCATION win32.mak

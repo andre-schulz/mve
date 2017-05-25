@@ -46,7 +46,6 @@ find_package(OpenMP REQUIRED)
 
 add_definitions(${PNG_DEFINITIONS})
 if(WIN32)
-    add_definitions(-DGLEW_STATIC)
     add_definitions(-DWIN32_LEAN_AND_MEAN -DVC_EXTRALEAN -DNOMINMAX)
 endif()
 include_directories(${JPEG_INCLUDE_DIR})
@@ -64,9 +63,11 @@ if(WIN32)
     set(LIBPNG_DLL_DEBUG "3rdparty/bin/libpng16d.dll")
     set(LIBPNG_DLL_RELEASE "3rdparty/bin/libpng16.dll")
     set(ZLIB_DLL_RELEASE "3rdparty/bin/zlib.dll")
-    set(LIBTIFF_DLL_RELEASE "3rdparty/bin/libtiff.dll")
+    set(LIBTIFF_DLL_RELEASE "3rdparty/bin/tiff.dll")
+    set(GLEW_DLL_RELEASE "3rdparty/bin/glew32.dll")
     install(FILES ${LIBPNG_DLL_RELEASE} ${ZLIB_DLL_RELEASE}
-        ${LIBTIFF_DLL_RELEASE} DESTINATION . CONFIGURATIONS Release RelWithDebInfo)
+        ${LIBTIFF_DLL_RELEASE} ${GLEW_DLL_RELEASE}
+        DESTINATION . CONFIGURATIONS Release RelWithDebInfo)
     install(FILES ${LIBPNG_DLL_DEBUG} ${ZLIB_DLL_RELEASE}
         ${LIBTIFF_DLL_RELEASE} DESTINATION . CONFIGURATIONS Debug)
 endif()

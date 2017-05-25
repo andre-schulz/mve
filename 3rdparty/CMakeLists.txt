@@ -1,22 +1,22 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.7)
 set(CMAKE_CONFIGURATION_TYPES Release)
 
 project(3rdparty)
 include(ExternalProject)
 
 set(LIBJPEG_FILENAME "jpegsr9b.zip")
-set(LIBPNG_FILENAME "lpng1621.zip")
-set(ZLIB_FILENAME "zlib128.zip")
-set(LIBTIFF_FILENAME "tiff-4.0.4.zip")
-set(GLEW_FILENAME "glew-1.12.0.zip")
+set(LIBPNG_FILENAME "lpng1629.7z")
+set(ZLIB_FILENAME "zlib-1.2.11.tar.xz")
+set(LIBTIFF_FILENAME "tiff-4.0.8.zip")
+set(GLEW_FILENAME "glew-2.0.0.tgz")
 set(QT5_FILENAME "qt-everywhere-opensource-src-5.5.1.7z")
-set(GTEST_FILENAME "release-1.7.0.zip")
+set(GTEST_FILENAME "release-1.8.0.tar.gz")
 
 set(LIBJPEG_URL "http://www.ijg.org/files/${LIBJPEG_FILENAME}")
 set(LIBPNG_URL "https://download.sourceforge.net/libpng/${LIBPNG_FILENAME}")
 set(ZLIB_URL "https://download.sourceforge.net/libpng/${ZLIB_FILENAME}")
 set(LIBTIFF_URL "http://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
-set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/1.12.0/${GLEW_FILENAME}")
+set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.0.0/${GLEW_FILENAME}")
 set(QT5_URL "https://download.qt.io/archive/qt/5.5/5.5.1/single/${QT5_FILENAME}")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
 
@@ -56,38 +56,39 @@ ExternalProject_Add_Step(libjpeg copy_win32_mak
 ExternalProject_Add(zlib
     PREFIX build/zlib
     URL ${ZLIB_URL}
-    URL_HASH SHA256=879d73d8cd4d155f31c1f04838ecd567d34bebda780156f0e82a20721b3973d5
+    URL_HASH SHA256=4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>)
+        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>
+        -DSKIP_INSTALL_FILES:BOOL=ON)
 
 ExternalProject_Add(libpng
     DEPENDS zlib
     PREFIX build/libpng
     URL ${LIBPNG_URL}
-    URL_HASH SHA256=1e4055c290992e0edf5045b1f78585a026d96f71ad706d6bda290cd9a181f4af
+    URL_HASH SHA256=b09a4261ca11cd47f74bf99f6552f46ed637db19e4da976c607a2c015d252c01
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>)
+        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>
+        -DPNG_STATIC:BOOL=OFF
+        -DPNG_TESTS:BOOL=OFF
+        -DSKIP_INSTALL_PROGRAMS:BOOL=ON
+        -DSKIP_INSTALL_FILES:BOOL=ON)
 
 ExternalProject_Add(libtiff
+    DEPENDS zlib
     PREFIX build/libtiff
     URL ${LIBTIFF_URL}
-    URL_HASH SHA256=4fec3abf1c79b000805446235fecc6b5a764527c5fe30e1f707b251a8720fce3
+    URL_HASH SHA256=099c77cf0975a79c8425f22884fd2dc1d6ce072119e3f39f751c6f4480533e23
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND nmake /f Makefile.vc lib
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffconf.h <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiff.h     <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffio.h   <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffio.hxx <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/tiffvers.h <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff.lib   <INSTALL_DIR>/lib
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff_i.lib <INSTALL_DIR>/lib
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libtiff/src/libtiff/libtiff/libtiff.dll <INSTALL_DIR>/bin
-    BUILD_IN_SOURCE 1)
+    CMAKE_ARGS
+        -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+        -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+        -Dcxx:BOOL=OFF
+        -Djpeg:BOOL=OFF
+        -Dold-jpeg:BOOL=OFF)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug"
         OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
@@ -113,16 +114,14 @@ endif()
 ExternalProject_Add(glew
     PREFIX build/glew
     URL ${GLEW_URL}
-    URL_HASH SHA256=6f1083eb034efbc3b2017ef052d58f3e9bd70963ec2acd26b3d59231ee1633d4
+    URL_HASH SHA256=c572c30a4e64689c342ba1624130ac98936d7af90c3103f9ce12b8a0c5736764
+    SOURCE_SUBDIR build/cmake
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-    CONFIGURE_COMMAND ""
-    PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${PATCHES_DIR}/glew.rc build
-    BUILD_COMMAND cd build/vc12
-        COMMAND msbuild glew.sln /m /p:Configuration=${VS_CONFIG} /p:Platform=${VS_PLATFORM} /p:PlatformToolset=${VS_PLATFORM_TOOLSET}
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/glew/src/glew/include <INSTALL_DIR>/include
-        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/glew/src/glew/lib/${VS_CONFIG}/${VS_PLATFORM}/glew32s.lib <INSTALL_DIR>/lib
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/glew/src/glew/bin/${VS_CONFIG}/${VS_PLATFORM} <INSTALL_DIR>/bin
-    BUILD_IN_SOURCE 1)
+    CMAKE_ARGS
+        -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+        -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+        -DBUILD_UTILS:BOOL=OFF
+        -DBUILD_SHARED_LIBS:BOOL=ON)
 
 ExternalProject_Add(qt5
     PREFIX qt5
@@ -148,10 +147,9 @@ ExternalProject_Add(qt5
 ExternalProject_Add(gtest
     PREFIX build/gtest
     URL ${GTEST_URL}
-    URL_HASH SHA256=b58cb7547a28b2c718d1e38aee18a3659c9e3ff52440297e965f5edffe34b6d0
+    URL_HASH SHA256=58a6f4277ca2bc8565222b3bbd58a177609e9c488e8a72649359ba51450db7d8
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/include <INSTALL_DIR>/include
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/build/gtest/src/gtest/${CMAKE_BUILD_TYPE} <INSTALL_DIR>/lib)
+        -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>)
 

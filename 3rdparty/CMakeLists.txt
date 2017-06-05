@@ -102,7 +102,7 @@ endif()
 if(CMAKE_CL_64)
     set(VS_PLATFORM "x64")
 else()
-    set(VS_PLATFORM "Win32")
+    message(FATAL_ERROR "32-bit builds are unsupported")
 endif()
 
 if(MSVC14)

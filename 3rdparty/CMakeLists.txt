@@ -4,6 +4,18 @@ set(CMAKE_CONFIGURATION_TYPES Release)
 project(3rdparty)
 include(ExternalProject)
 
+if(NOT WIN32)
+    message(FATAL_ERROR "The 3rdparty project has to be built only on Windows")
+endif()
+
+if(NOT MSVC)
+    message(FATAL_ERROR "Compilers other than Visual Studio are unsupported on Windows")
+endif()
+
+if(NOT CMAKE_CL_64)
+    message(FATAL_ERROR "32-bit builds are unsupported")
+endif()
+
 set(LIBJPEG_FILENAME "jpegsr9b.zip")
 set(LIBPNG_FILENAME "lpng1629.7z")
 set(ZLIB_FILENAME "zlib-1.2.11.tar.xz")
@@ -89,27 +101,6 @@ ExternalProject_Add(libtiff
         -Dcxx:BOOL=OFF
         -Djpeg:BOOL=OFF
         -Dold-jpeg:BOOL=OFF)
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug"
-        OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    set(VS_CONFIG "Debug")
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release"
-        OR CMAKE_BUILD_TYPE STREQUAL "MinSizeRel"
-        OR NOT CMAKE_BUILD_TYPE)
-    set(VS_CONFIG "Release")
-endif()
-
-if(CMAKE_CL_64)
-    set(VS_PLATFORM "x64")
-else()
-    message(FATAL_ERROR "32-bit builds are unsupported")
-endif()
-
-if(MSVC14)
-    set(VS_PLATFORM_TOOLSET "v140")
-else()
-    message(FATAL_ERROR "Unsupported Visual Studio version")
-endif()
 
 ExternalProject_Add(glew
     PREFIX build/glew

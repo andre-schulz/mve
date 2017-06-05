@@ -2,11 +2,7 @@ if(WIN32 AND MSVC)
     set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION .)
 
     # HACK: Install Visual Studio's OpenMP library
-    if(MSVC11)
-        set(MSVC_VER "11")
-    elseif(MSVC12)
-        set(MSVC_VER "12")
-    elseif(MSVC14)
+    if(MSVC14)
         set(MSVC_VER "14")
     else()
         message(FATAL_ERROR "Unsupported Visual Studio version")

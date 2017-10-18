@@ -50,7 +50,7 @@ include_directories(libs)
 
 add_subdirectory(libs)
 add_subdirectory(apps)
-#add_subdirectory(tests)
+add_subdirectory(tests)
 
 # Install 3rd party libraries
 if(WIN32)
@@ -71,4 +71,3 @@ if(WIN32)
         ${LIBTIFF_DLL_DEBUG} ${GLEW_DLL_DEBUG} ${LIBJPEG_TURBO_DEBUG}
         DESTINATION . CONFIGURATIONS Debug)
 endif()
-

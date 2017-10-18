@@ -4,6 +4,6 @@ file (GLOB SOURCES "[^_]*.cc")
 add_executable(util_test ${SOURCES})
 
 # Link test executable against gtest & gtest_main
-target_link_libraries(util_test ${GTEST_LIBRARY_DEBUG} ${GTEST_MAIN_LIBRARY_DEBUG} mve mve_util)
+target_link_libraries(util_test ${GTEST_BOTH_LIBRARIES} mve mve_util)
 
 add_test(NAME util_test COMMAND util_test)

@@ -10,13 +10,13 @@ add_library(mve_ogl STATIC ${SOURCES} ${HEADERS})
 target_include_directories(mve_ogl PUBLIC ${OPENGL_INCLUDE_DIR})
 
 target_link_libraries(mve_ogl
-    PRIVATE
-        ${OPENGL_LIBRARIES}
+    PUBLIC
         mve
         mve_math
         mve_util
+        ${OPENGL_LIBRARIES}
 )
 if(WIN32)
-    target_link_libraries(mve_ogl PRIVATE GLEW::GLEW)
+    target_link_libraries(mve_ogl PUBLIC GLEW::GLEW)
 endif()
 

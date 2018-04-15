@@ -17,11 +17,11 @@ if(NOT CMAKE_CL_64)
 endif()
 
 set(LIBJPEG_FILENAME "jpegsr9b.zip")
-set(LIBPNG_FILENAME "lpng1629.7z")
+set(LIBPNG_FILENAME "lpng1634.7z")
 set(ZLIB_FILENAME "zlib-1.2.11.tar.xz")
-set(LIBTIFF_FILENAME "tiff-4.0.8.zip")
+set(LIBTIFF_FILENAME "tiff-4.0.9.zip")
 set(GLEW_FILENAME "glew-2.0.0.tgz")
-set(QT5_FILENAME "qt-everywhere-opensource-src-5.5.1.7z")
+set(QT5_FILENAME "qt-everywhere-opensource-src-5.6.3.tar.xz")
 set(GTEST_FILENAME "release-1.8.0.tar.gz")
 
 set(LIBJPEG_URL "http://www.ijg.org/files/${LIBJPEG_FILENAME}")
@@ -29,7 +29,7 @@ set(LIBPNG_URL "https://download.sourceforge.net/libpng/${LIBPNG_FILENAME}")
 set(ZLIB_URL "https://download.sourceforge.net/libpng/${ZLIB_FILENAME}")
 set(LIBTIFF_URL "http://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
 set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.0.0/${GLEW_FILENAME}")
-set(QT5_URL "https://download.qt.io/archive/qt/5.5/5.5.1/single/${QT5_FILENAME}")
+set(QT5_URL "https://download.qt.io/archive/qt/5.6/5.6.3/single/${QT5_FILENAME}")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
 
 set(PATCHES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/patches")
@@ -79,7 +79,7 @@ ExternalProject_Add(libpng
     DEPENDS zlib
     PREFIX build/libpng
     URL ${LIBPNG_URL}
-    URL_HASH SHA256=b09a4261ca11cd47f74bf99f6552f46ed637db19e4da976c607a2c015d252c01
+    URL_HASH SHA256=834126d43f93afe4d2cd78690d5728062a26eaf0342302a69367a382b5f52c0e
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
@@ -93,7 +93,7 @@ ExternalProject_Add(libtiff
     DEPENDS zlib
     PREFIX build/libtiff
     URL ${LIBTIFF_URL}
-    URL_HASH SHA256=099c77cf0975a79c8425f22884fd2dc1d6ce072119e3f39f751c6f4480533e23
+    URL_HASH SHA256=e1af5558a71cef8e6baa8d41b875769b0fb549260595db579a932472dae64f66
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
@@ -117,7 +117,7 @@ ExternalProject_Add(glew
 ExternalProject_Add(qt5
     PREFIX qt5
     URL ${QT5_URL}
-    URL_HASH SHA256=eb7c430f9f73d8f9d1a0d328e8a77549ffcf3b9915bee0c3dd6ae9ceffb86ef9
+    URL_HASH SHA256=2fa0cf2e5e8841b29a4be62062c1a65c4f6f2cf1beaf61a5fd661f520cd776d0
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CONFIGURE_COMMAND
         cmd /C configure -prefix "<INSTALL_DIR>" -debug-and-release -opensource
@@ -125,12 +125,12 @@ ExternalProject_Add(qt5
             -skip qt3d -skip qtactiveqt -skip qtandroidextras
             -skip qtcanvas3d -skip qtconnectivity -skip qtdeclarative
             -skip qtdoc -skip qtenginio -skip qtgraphicaleffects
-            -skip qtlocation -skip qtmultimedia -skip qtquick1
-            -skip qtquickcontrols -skip qtscript -skip qtsensors
-            -skip qtserialport -skip qttools -skip qttranslations
-            -skip qtwayland -skip qtwebchannel -skip qtwebkit
-            -skip qtwebkit-examples -skip qtwebsockets
-            -nomake examples -no-compile-examples
+            -skip qtlocation -skip qtmacextras -skip qtmultimedia
+            -skip qtquickcontrols -skip quickcontrols2 -skip qtscript
+            -skip qtsensors -skip qtserialbus -skip qtserialport -skip qttools
+            -skip qttranslations -skip qtwayland -skip qtwebchannel
+            -skip qtwebengine -skip qtwebsockets -skip qtwebview
+            -skip qtx11extras -nomake examples -no-compile-examples
     BUILD_COMMAND nmake
     BUILD_IN_SOURCE 1
     INSTALL_COMMAND nmake install)

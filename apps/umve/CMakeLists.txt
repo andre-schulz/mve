@@ -39,7 +39,7 @@ if(WIN32)
     target_link_libraries(umve PUBLIC GLEW::GLEW)
 endif()
 
-add_subdirectory(plugins)
+#add_subdirectory(plugins)
 
 if(WIN32)
     # Install Qt5 DLLs

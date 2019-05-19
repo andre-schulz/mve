@@ -10,21 +10,21 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED yes)
 
-# Warning flags
+# Compiler flags
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    string(APPEND CMAKE_CXX_FLAGS " /W3")
+    add_compile_options(/W3)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra -Wundef -pedantic")
-    string(APPEND CMAKE_CXX_FLAGS " -mpopcnt")
+    add_compile_options(-Wall -Wextra -Wundef -pedantic)
+    add_compile_options(-mpopcnt)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    string(APPEND CMAKE_CXX_FLAGS " -Weverything -pedantic")
+    add_compile_options(-Weverything -pedantic)
 endif()
 
 if(WIN32)
     add_definitions(-DWIN32_LEAN_AND_MEAN -DVC_EXTRALEAN -DNOMINMAX)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     if(MSVC)
-        string(APPEND CMAKE_CXX_FLAGS " /MP")
+        add_compile_options(/MP)
         option(MVE_BUILD_WITH_SSE2 "Build MVE with SSE2 support" ON)
         option(MVE_BUILD_WITH_SSE3 "Build MVE with SSE3 support" ON)
         if(MVE_BUILD_WITH_SSE2)
@@ -44,7 +44,7 @@ endif()
 include(CPack)
 
 find_package(OpenMP REQUIRED)
-string(APPEND CMAKE_CXX_FLAGS " ${OpenMP_CXX_FLAGS}")
+add_compile_options(${OpenMP_CXX_FLAGS})
 
 include_directories(libs)
 

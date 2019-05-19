@@ -50,7 +50,11 @@ include_directories(libs)
 
 add_subdirectory(libs)
 add_subdirectory(apps)
-add_subdirectory(tests)
+
+option(MVE_BUILD_TESTS "Build MVE test suite" OFF)
+if(MVE_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
 
 # Install 3rd party libraries
 if(WIN32)

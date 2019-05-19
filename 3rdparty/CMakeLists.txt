@@ -142,5 +142,9 @@ ExternalProject_Add(gtest
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
-        -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>)
+        -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+        -DBUILD_GTEST:BOOL=ON
+        -DBUILD_GMOCK:BOOL=OFF
+        -Dgtest_force_shared_crt:BOOL=ON
+        -Dgtest_hide_internal_symbols:BOOL=ON)
 

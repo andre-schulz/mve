@@ -287,7 +287,7 @@ get_cwd_string (void)
         {
             std::string ret(buf);
             delete[] buf;
-            return ret;
+            return sanitize_path(ret);
         }
         delete[] buf;
         size = size << 1;

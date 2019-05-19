@@ -15,7 +15,7 @@ TEST(QuaternionTest, Rotate)
     Vec3f z(0.0f, 0.0f, 1.0f);
 
     /* 90 deg ccw rotation around z. */
-    Quat4f q(z, M_PI / 2.0f);
+    Quat4f q(z, MATH_PI / 2.0f);
 
     float error = (y - q.rotate(x)).norm();
     EXPECT_TRUE(error < 1e-7f);
@@ -31,7 +31,7 @@ TEST(QuaternionTest, ToAndFromRotationMatrix)
     Quat4f q, q_test;
 
     /* 90 deg ccw rotation around x. */
-    q.set(x, M_PI / 2.0f);
+    q.set(x, MATH_PI / 2.0f);
     q.to_rotation_matrix(*rot);
     q_test.set_from_rotation_matrix(*rot);
 
@@ -41,7 +41,7 @@ TEST(QuaternionTest, ToAndFromRotationMatrix)
     EXPECT_NEAR(q[3], q_test[3], 1e-7);
 
     /* 180 deg ccw rotation around y. */
-    q.set(y, M_PI);
+    q.set(y, MATH_PI);
     q.to_rotation_matrix(*rot);
     q_test.set_from_rotation_matrix(*rot);
 
@@ -51,7 +51,7 @@ TEST(QuaternionTest, ToAndFromRotationMatrix)
     EXPECT_NEAR(q[3], q_test[3], 1e-7);
 
     /* 45 deg ccw rotation around z. */
-    q.set(z, M_PI / 4.0f);
+    q.set(z, MATH_PI / 4.0f);
     q.to_rotation_matrix(*rot);
     q_test.set_from_rotation_matrix(*rot);
 

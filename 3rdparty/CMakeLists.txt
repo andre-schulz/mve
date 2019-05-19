@@ -22,7 +22,7 @@ set(ZLIB_FILENAME "zlib-1.2.11.tar.xz")
 set(LIBTIFF_FILENAME "tiff-4.0.9.zip")
 set(GLEW_FILENAME "glew-2.0.0.tgz")
 set(QT5_FILENAME "qt-everywhere-opensource-src-5.6.3.tar.xz")
-set(GTEST_FILENAME "release-1.8.0.tar.gz")
+set(GTEST_FILENAME "release-1.8.1.tar.gz")
 
 set(LIBJPEG_URL "http://www.ijg.org/files/${LIBJPEG_FILENAME}")
 set(LIBPNG_URL "https://download.sourceforge.net/libpng/${LIBPNG_FILENAME}")
@@ -138,12 +138,11 @@ ExternalProject_Add(qt5
 ExternalProject_Add(gtest
     PREFIX build/gtest
     URL ${GTEST_URL}
-    URL_HASH SHA256=58a6f4277ca2bc8565222b3bbd58a177609e9c488e8a72649359ba51450db7d8
+    URL_HASH SHA256=9bf1fe5182a604b4135edc1a425ae356c9ad15e9b23f9f12a02e80184c3a249c
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
         -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        -DBUILD_GTEST:BOOL=ON
         -DBUILD_GMOCK:BOOL=OFF
         -Dgtest_force_shared_crt:BOOL=ON
         -Dgtest_hide_internal_symbols:BOOL=ON)

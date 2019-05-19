@@ -53,6 +53,7 @@ add_subdirectory(apps)
 
 option(MVE_BUILD_TESTS "Build MVE test suite" OFF)
 if(MVE_BUILD_TESTS)
+    enable_testing()
     add_subdirectory(tests)
 endif()
 

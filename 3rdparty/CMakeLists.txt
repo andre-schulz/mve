@@ -17,10 +17,10 @@ if(NOT CMAKE_CL_64)
 endif()
 
 set(LIBJPEG_FILENAME "jpegsr9b.zip")
-set(LIBPNG_FILENAME "lpng1634.7z")
+set(LIBPNG_FILENAME "lpng1637.7z")
 set(ZLIB_FILENAME "zlib-1.2.11.tar.xz")
-set(LIBTIFF_FILENAME "tiff-4.0.9.zip")
-set(GLEW_FILENAME "glew-2.0.0.tgz")
+set(LIBTIFF_FILENAME "tiff-4.0.10.tar.gz")
+set(GLEW_FILENAME "glew-2.1.0.tgz")
 set(QT5_FILENAME "qt-everywhere-opensource-src-5.6.3.tar.xz")
 set(GTEST_FILENAME "release-1.8.1.tar.gz")
 
@@ -28,7 +28,7 @@ set(LIBJPEG_URL "http://www.ijg.org/files/${LIBJPEG_FILENAME}")
 set(LIBPNG_URL "https://download.sourceforge.net/libpng/${LIBPNG_FILENAME}")
 set(ZLIB_URL "https://download.sourceforge.net/libpng/${ZLIB_FILENAME}")
 set(LIBTIFF_URL "http://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
-set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.0.0/${GLEW_FILENAME}")
+set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.1.0/${GLEW_FILENAME}")
 set(QT5_URL "https://download.qt.io/archive/qt/5.6/5.6.3/single/${QT5_FILENAME}")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
 
@@ -79,7 +79,7 @@ ExternalProject_Add(libpng
     DEPENDS zlib
     PREFIX build/libpng
     URL ${LIBPNG_URL}
-    URL_HASH SHA256=834126d43f93afe4d2cd78690d5728062a26eaf0342302a69367a382b5f52c0e
+    URL_HASH SHA256=1f1e8fc10d3575c9694a72d63c49752d2251d9683b6030850d806acc5e5e86fa
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
@@ -93,7 +93,7 @@ ExternalProject_Add(libtiff
     DEPENDS zlib
     PREFIX build/libtiff
     URL ${LIBTIFF_URL}
-    URL_HASH SHA256=e1af5558a71cef8e6baa8d41b875769b0fb549260595db579a932472dae64f66
+    URL_HASH SHA256=2c52d11ccaf767457db0c46795d9c7d1a8d8f76f68b0b800a3dfe45786b996e4
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
@@ -105,7 +105,7 @@ ExternalProject_Add(libtiff
 ExternalProject_Add(glew
     PREFIX build/glew
     URL ${GLEW_URL}
-    URL_HASH SHA256=c572c30a4e64689c342ba1624130ac98936d7af90c3103f9ce12b8a0c5736764
+    URL_HASH SHA256=04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95
     SOURCE_SUBDIR build/cmake
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     CMAKE_ARGS

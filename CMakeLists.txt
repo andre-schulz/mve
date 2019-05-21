@@ -56,15 +56,19 @@ add_subdirectory(apps)
 if(WIN32)
     set(LIBPNG_DLL_DEBUG "3rdparty/bin/libpng16d.dll")
     set(LIBPNG_DLL_RELEASE "3rdparty/bin/libpng16.dll")
+    set(ZLIB_DLL_DEBUG "3rdparty/bin/zlibd.dll")
     set(ZLIB_DLL_RELEASE "3rdparty/bin/zlib.dll")
+    set(LIBTIFF_DLL_DEBUG "3rdparty/bin/tiffd.dll")
     set(LIBTIFF_DLL_RELEASE "3rdparty/bin/tiff.dll")
+    set(GLEW_DLL_DEBUG "3rdparty/bin/glew32d.dll")
     set(GLEW_DLL_RELEASE "3rdparty/bin/glew32.dll")
     set(LIBJPEG_TURBO_DEBUG "3rdparty/bin/jpeg62d.dll")
     set(LIBJPEG_TURBO_RELEASE "3rdparty/bin/jpeg62.dll")
     install(FILES ${LIBPNG_DLL_RELEASE} ${ZLIB_DLL_RELEASE}
         ${LIBTIFF_DLL_RELEASE} ${GLEW_DLL_RELEASE} ${LIBJPEG_TURBO_RELEASE}
         DESTINATION . CONFIGURATIONS Release RelWithDebInfo)
-    install(FILES ${LIBPNG_DLL_DEBUG} ${ZLIB_DLL_RELEASE}
-        ${LIBTIFF_DLL_RELEASE} ${LIBJPEG_TURBO_DEBUG} DESTINATION . CONFIGURATIONS Debug)
+    install(FILES ${LIBPNG_DLL_DEBUG} ${ZLIB_DLL_DEBUG}
+        ${LIBTIFF_DLL_DEBUG} ${GLEW_DLL_DEBUG} ${LIBJPEG_TURBO_DEBUG}
+        DESTINATION . CONFIGURATIONS Debug)
 endif()
 

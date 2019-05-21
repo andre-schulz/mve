@@ -16,7 +16,7 @@ if(NOT CMAKE_CL_64)
     message(FATAL_ERROR "32-bit builds are unsupported")
 endif()
 
-set(LIBJPEG_FILENAME "jpegsr9b.zip")
+set(LIBJPEG_TURBO_FILENAME "libjpeg-turbo-2.0.2.tar.gz")
 set(LIBPNG_FILENAME "lpng1637.7z")
 set(ZLIB_FILENAME "zlib-1.2.11.tar.xz")
 set(LIBTIFF_FILENAME "tiff-4.0.10.tar.gz")
@@ -24,7 +24,7 @@ set(GLEW_FILENAME "glew-2.1.0.tgz")
 set(QT5_FILENAME "qt-everywhere-opensource-src-5.6.3.tar.xz")
 set(GTEST_FILENAME "release-1.8.1.tar.gz")
 
-set(LIBJPEG_URL "http://www.ijg.org/files/${LIBJPEG_FILENAME}")
+set(LIBJPEG_TURBO_URL "https://download.sourceforge.net/project/libjpeg-turbo/2.0.2/${LIBJPEG_TURBO_FILENAME}")
 set(LIBPNG_URL "https://download.sourceforge.net/libpng/${LIBPNG_FILENAME}")
 set(ZLIB_URL "https://download.sourceforge.net/libpng/${ZLIB_FILENAME}")
 set(LIBTIFF_URL "http://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
@@ -38,32 +38,18 @@ file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
-set(PFx86 "ProgramFiles(x86)")
-find_file(WIN32_MAK_LOCATION win32.mak
-    DOC "Location of win32.mak"
-    PATHS
-        "$ENV{${PFx86}}\\Microsoft SDKs\\Windows\\v7.0A\\Include"
-        "$ENV{${PFx86}}\\Microsoft SDKs\\Windows\\v7.1\\Include"
-        "$ENV{${PFx86}}\\Microsoft SDKs\\Windows\\v7.1A\\Include"
-        ENV Path)
-ExternalProject_Add(libjpeg
-    PREFIX build/libjpeg
-    URL ${LIBJPEG_URL}
-    URL_HASH SHA256=d98f2a927bd17a58fe14781ec7957b5d514a8e5f04c0d071e65b967bf34e19d4
+ExternalProject_Add(libjpeg-turbo
+    PREFIX build/libjpeg-turbo
+    URL ${LIBJPEG_TURBO_URL}
+    URL_HASH SHA256=acb8599fe5399af114287ee5907aea4456f8f2c1cc96d26c28aebfdf5ee82fed
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-    CONFIGURE_COMMAND nmake /f makefile.vc setup-v10
-    BUILD_COMMAND nmake /f makefile.vc
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jconfig.h <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jerror.h   <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jmorecfg.h <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jpegint.h  <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/jpeglib.h  <INSTALL_DIR>/include
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/build/libjpeg/src/libjpeg/libjpeg.lib  <INSTALL_DIR>/lib
-    BUILD_IN_SOURCE 1)
-ExternalProject_Add_Step(libjpeg copy_win32_mak
-    COMMAND ${CMAKE_COMMAND} -E copy ${WIN32_MAK_LOCATION} <SOURCE_DIR>
-    DEPENDEES download
-    DEPENDERS configure)
+    CMAKE_ARGS
+        -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
+        -DCMAKE_DEBUG_POSTFIX:STRING=d
+        -DCMAKE_INSTALL_PREFIX:STRING=<INSTALL_DIR>
+        -DENABLE_STATIC:BOOL=OFF
+        -DWITH_SIMD:BOOL=OFF
+        -DWITH_TURBOJPEG:BOOL=OFF)
 
 ExternalProject_Add(zlib
     PREFIX build/zlib

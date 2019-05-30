@@ -58,7 +58,8 @@ TEST(VectorTest, MiscOperations)
 TEST(VectorTest, IsNan)
 {
     using namespace math;
+#define MATH_FLT_NAN (std::numeric_limits<float>::quiet_NaN())
     EXPECT_FALSE(math::isnan(Vec3f(1.0f, 2.0f, 3.0f)));
-    EXPECT_TRUE(math::isnan(Vec3f(1.0f, 2.0f, 0.0f / 0.0f)));
-    EXPECT_TRUE(math::isnan(Vec3f(0.0f / 0.0f, 2.0f, 3.0f)));
+    EXPECT_TRUE(math::isnan(Vec3f(1.0f, 2.0f, MATH_FLT_NAN)));
+    EXPECT_TRUE(math::isnan(Vec3f(MATH_FLT_NAN, 2.0f, 3.0f)));
 }

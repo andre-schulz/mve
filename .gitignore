@@ -24,5 +24,12 @@ apps/sfmrecon/sfmrecon
 apps/umve/umve
 
 # CMake stuff
+3rdparty/bin/
 3rdparty/build/
-3rdparty/qt5/
+3rdparty/doc/
+3rdparty/include/
+3rdparty/lib/
+3rdparty/mkspecs/
+3rdparty/plugins/
+3rdparty/share/
+build/

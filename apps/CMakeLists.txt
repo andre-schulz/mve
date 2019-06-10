@@ -6,6 +6,7 @@ endif()
 
 add_subdirectory(bundle2pset)
 add_subdirectory(dmrecon)
+add_subdirectory(featurerecon)
 add_subdirectory(fssrecon)
 add_subdirectory(makescene)
 add_subdirectory(mesh2pset)

@@ -37,7 +37,7 @@ set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.1.0/${GLEW_F
 set(GLEW_SHA256 "04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95")
 
 set(QT5_FILENAME "qt-everywhere-opensource-src-5.6.3.tar.xz")
-set(QT5_URL "https://download.qt.io/archive/qt/5.6/5.6.3/single/${QT5_FILENAME}")
+set(QT5_URL "https://download.qt.io/new_archive/qt/5.6/5.6.3/single/${QT5_FILENAME}")
 set(QT5_SHA256 "2fa0cf2e5e8841b29a4be62062c1a65c4f6f2cf1beaf61a5fd661f520cd776d0")
 
 set(GTEST_FILENAME "release-1.8.1.tar.gz")

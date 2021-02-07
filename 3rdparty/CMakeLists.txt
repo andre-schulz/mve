@@ -16,9 +16,24 @@ if(NOT CMAKE_CL_64)
     message(FATAL_ERROR "32-bit builds are unsupported")
 endif()
 
-set(LIBJPEG_TURBO_FILENAME "libjpeg-turbo-2.0.5.tar.gz")
-set(LIBJPEG_TURBO_URL "https://download.sourceforge.net/project/libjpeg-turbo/2.0.5/${LIBJPEG_TURBO_FILENAME}")
-set(LIBJPEG_TURBO_SHA256 "16f8f6f2715b3a38ab562a84357c793dd56ae9899ce130563c72cd93d8357b5d")
+# Qt's build system requires either Perl or PowerShell >= 5.0
+find_package(Perl QUIET)
+
+# Determine PowerShell version
+execute_process(COMMAND powershell -command $PSVersionTable.PSVersion.Major
+    OUTPUT_VARIABLE POWERSHELL_VERSION_MAJOR OUTPUT_STRIP_TRAILING_WHITESPACE)
+execute_process(COMMAND powershell -command $PSVersionTable.PSVersion.Minor
+    OUTPUT_VARIABLE POWERSHELL_VERSION_MINOR OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(POWERSHELL_VERSION ${POWERSHELL_VERSION_MAJOR}.${POWERSHELL_VERSION_MINOR})
+if(POWERSHELL_VERSION VERSION_LESS 5.0)
+    message(WARNING "Qt5 will NOT be built because neither Perl nor PowerShell >= 5.0 were found!"
+        " If you don't want to build UMVE, you can ignore this warning."
+		" If you want to build UMVE, please install either Perl or update your PowerShell.")
+endif()
+
+set(LIBJPEG_TURBO_FILENAME "libjpeg-turbo-2.0.6.tar.gz")
+set(LIBJPEG_TURBO_URL "https://download.sourceforge.net/project/libjpeg-turbo/2.0.6/${LIBJPEG_TURBO_FILENAME}")
+set(LIBJPEG_TURBO_SHA256 "d74b92ac33b0e3657123ddcf6728788c90dc84dcb6a52013d758af3c4af481bb")
 
 set(LIBPNG_FILENAME "lpng1637.7z")
 set(LIBPNG_URL "https://download.sourceforge.net/libpng/${LIBPNG_FILENAME}")
@@ -28,17 +43,17 @@ set(ZLIB_FILENAME "zlib-1.2.11.tar.xz")
 set(ZLIB_URL "https://download.sourceforge.net/libpng/${ZLIB_FILENAME}")
 set(ZLIB_SHA256 "4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066")
 
-set(LIBTIFF_FILENAME "tiff-4.1.0.tar.gz")
+set(LIBTIFF_FILENAME "tiff-4.2.0.tar.gz")
 set(LIBTIFF_URL "http://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
-set(LIBTIFF_SHA256 "5d29f32517dadb6dbcd1255ea5bbc93a2b54b94fbf83653b4d65c7d6775b8634")
+set(LIBTIFF_SHA256 "eb0484e568ead8fa23b513e9b0041df7e327f4ee2d22db5a533929dfc19633cb")
 
-set(GLEW_FILENAME "glew-2.1.0.tgz")
-set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.1.0/${GLEW_FILENAME}")
-set(GLEW_SHA256 "04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95")
+set(GLEW_FILENAME "glew-2.2.0.tgz")
+set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.2.0/${GLEW_FILENAME}")
+set(GLEW_SHA256 "d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1")
 
-set(QT5_FILENAME "qt-everywhere-opensource-src-5.6.3.tar.xz")
-set(QT5_URL "https://download.qt.io/new_archive/qt/5.6/5.6.3/single/${QT5_FILENAME}")
-set(QT5_SHA256 "2fa0cf2e5e8841b29a4be62062c1a65c4f6f2cf1beaf61a5fd661f520cd776d0")
+set(QT5_FILENAME "qt-everywhere-src-5.15.2.tar.xz")
+set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.2/single/${QT5_FILENAME}")
+set(QT5_SHA256 "3a530d1b243b5dec00bc54937455471aaa3e56849d2593edb8ded07228202240")
 
 set(GTEST_FILENAME "release-1.8.1.tar.gz")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
@@ -117,27 +132,35 @@ ExternalProject_Add(glew
         -DBUILD_SHARED_LIBS:BOOL=ON
 )
 
-ExternalProject_Add(qt5
-    PREFIX qt5
-    URL ${QT5_URL}
-    URL_HASH SHA256=${QT5_SHA256}
-    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-    CONFIGURE_COMMAND
-        cmd /C configure -prefix "<INSTALL_DIR>" -debug-and-release -opensource
-            -confirm-license -shared -no-audio-backend -mp -opengl desktop
-            -skip qt3d -skip qtactiveqt -skip qtandroidextras
-            -skip qtcanvas3d -skip qtconnectivity -skip qtdeclarative
-            -skip qtdoc -skip qtenginio -skip qtgraphicaleffects
-            -skip qtlocation -skip qtmacextras -skip qtmultimedia
-            -skip qtquickcontrols -skip quickcontrols2 -skip qtscript
-            -skip qtsensors -skip qtserialbus -skip qtserialport -skip qttools
-            -skip qttranslations -skip qtwayland -skip qtwebchannel
-            -skip qtwebengine -skip qtwebsockets -skip qtwebview
-            -skip qtx11extras -nomake examples -no-compile-examples
-    BUILD_COMMAND nmake
-    BUILD_IN_SOURCE 1
-    INSTALL_COMMAND nmake install
-)
+if(PERL_FOUND OR POWERSHELL_VERSION VERSION_GREATER_EQUAL 5.0)
+    ExternalProject_Add(qt5
+        PREFIX build/qt5
+        URL ${QT5_URL}
+        URL_HASH SHA256=${QT5_SHA256}
+        INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+        CONFIGURE_COMMAND
+            cmd /C configure -prefix "<INSTALL_DIR>" -debug-and-release -opensource
+                -confirm-license -shared -mp -opengl desktop
+                -nomake examples -nomake tests
+                -no-accessibility -no-dbus -no-feature-network
+                -no-feature-printer -no-feature-sql -no-feature-testlib
+                -skip qt3d -skip qtactiveqt -skip qtandroidextras
+                -skip qtcanvas3d -skip qtcharts -skip qtconnectivity
+                -skip qtdatavis3d -skip qtdeclarative -skip qtdoc -skip qtgamepad
+                -skip qtgraphicaleffects -skip qtlocation -skip qtlottie
+                -skip qtmacextras -skip qtmultimedia -skip qtnetworkauth
+                -skip qtpurchasing -skip qtquickcontrols -skip quickcontrols2
+                -skip qtquicktimeline -skip qtremoteobjects -skip qtscript
+                -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport
+                -skip qtspeech -skip qttools -skip qttranslations
+                -skip qtvirtualkeyboard -skip qtwayland -skip qtwebchannel
+                -skip qtwebengine -skip qtwebglplugin -skip qtwebsockets
+                -skip qtwebview -skip qtx11extras -skip qtxmlpatterns
+        BUILD_COMMAND nmake
+        BUILD_IN_SOURCE 1
+        INSTALL_COMMAND nmake install
+    )
+endif()
 
 ExternalProject_Add(gtest
     PREFIX build/gtest

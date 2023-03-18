@@ -44,8 +44,8 @@ public:
     mve::View::Ptr getMVEView() const;
 
     std::string createFileName(float scale) const;
-    float footPrint(math::Vec3f const& point);
-    float footPrintScaled(math::Vec3f const& point);
+    float footPrint(math::Vec3f const& point) const;
+    float footPrintScaled(math::Vec3f const& point) const;
     math::Vec3f viewRay(int x, int y, int level) const;
     math::Vec3f viewRay(float x, float y, int level) const;
     math::Vec3f viewRayScaled(int x, int y) const;
@@ -54,8 +54,8 @@ public:
     void saveReconAsPly(std::string const& path, float scale) const;
     bool seesFeature(std::size_t idx) const;
     void prepareMasterView(int scale);
-    math::Vec2f worldToScreen(math::Vec3f const& point, int level);
-    math::Vec2f worldToScreenScaled(math::Vec3f const& point);
+    math::Vec2f worldToScreen(math::Vec3f const& point, int level) const;
+    math::Vec2f worldToScreenScaled(math::Vec3f const& point) const;
     std::size_t getViewID() const;
 
 public:
@@ -151,13 +151,13 @@ SingleView::createFileName(float scale) const
 }
 
 inline float
-SingleView::footPrint(math::Vec3f const& point)
+SingleView::footPrint(math::Vec3f const& point) const
 {
     return (this->worldToCam.mult(point, 1)[2] * this->source_level.invproj[0]);
 }
 
 inline float
-SingleView::footPrintScaled(math::Vec3f const& point)
+SingleView::footPrintScaled(math::Vec3f const& point) const
 {
     assert(this->has_target_level);
     return (this->worldToCam.mult(point, 1)[2] * this->target_level.invproj[0]);
@@ -173,7 +173,7 @@ SingleView::seesFeature(std::size_t idx) const
 }
 
 inline math::Vec2f
-SingleView::worldToScreenScaled(math::Vec3f const& point)
+SingleView::worldToScreenScaled(math::Vec3f const& point) const
 {
     assert(this->has_target_level);
 
@@ -185,7 +185,7 @@ SingleView::worldToScreenScaled(math::Vec3f const& point)
 }
 
 inline math::Vec2f
-SingleView::worldToScreen(math::Vec3f const& point, int level)
+SingleView::worldToScreen(math::Vec3f const& point, int level) const
 {
     math::Vec3f cp(this->worldToCam.mult(point,1.f));
     math::Vec3f sp = this->img_pyramid->at(level).proj * cp;

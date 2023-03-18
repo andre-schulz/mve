@@ -108,20 +108,20 @@ LocalViewSelection::performVS()
 
             // parallax w.r.t. reference view
             float dp = math::clamp(refDir.dot(viewDir[i]), -1.f, 1.f);
-            float plx = std::acos(dp) * 180.f / pi;
+            float plx = std::acos(dp) * 180.f / MATH_PI;
             score *= parallaxToWeight(plx);
             assert(!MATH_ISNAN(score));
 
             for (sel = selected.begin(); sel != selected.end(); ++sel) {
                 // parallax w.r.t. other selected views
                 dp = math::clamp(viewDir[*sel].dot(viewDir[i]), -1.f, 1.f);
-                plx = std::acos(dp) * 180.f / pi;
+                plx = std::acos(dp) * 180.f / MATH_PI;
                 score *= parallaxToWeight(plx);
 
                 // epipolar geometry
                 dp = epipolarPlane[i].dot(epipolarPlane[*sel]);
                 dp = math::clamp(dp, -1.f, 1.f);
-                float angle = std::abs(std::acos(dp) * 180.f / pi);
+                float angle = std::abs(std::acos(dp) * 180.f / MATH_PI);
                 if (angle > 90.f)
                     angle = 180.f - angle;
 

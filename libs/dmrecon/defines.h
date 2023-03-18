@@ -25,8 +25,6 @@ typedef std::set< std::size_t > IndexSet;
 typedef std::vector< math::Vec3f > Samples;
 typedef std::vector< math::Vec2f > PixelCoords;
 
-const float pi = 3.141592653589793f;
-
 template<typename T>
 inline const T sqr(const T& a)
 {

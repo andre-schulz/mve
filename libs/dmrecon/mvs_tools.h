@@ -48,7 +48,7 @@ parallax(math::Vec3f const& p, mvs::SingleView::ConstPtr v1, mvs::SingleView::Co
     math::Vec3f dir1 = (p - v1->camPos).normalized();
     math::Vec3f dir2 = (p - v2->camPos).normalized();
     float dp = std::max(std::min(dir1.dot(dir2), 1.f), -1.f);
-    float plx = std::acos(dp) * 180.f / pi;
+    float plx = std::acos(dp) * 180.f / MATH_PI;
     return plx;
 }
 

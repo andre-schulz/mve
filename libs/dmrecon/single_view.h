@@ -177,7 +177,7 @@ SingleView::worldToScreenScaled(math::Vec3f const& point) const
 {
     assert(this->has_target_level);
 
-    math::Vec3f cp(this->worldToCam.mult(point,1.f));
+    math::Vec3f cp(this->worldToCam.mult(point, 1.f));
     math::Vec3f sp = this->target_level.proj * cp;
 
     math::Vec2f res(sp[0] / sp[2] - 0.5f, sp[1] / sp[2] - 0.5f);
@@ -187,7 +187,7 @@ SingleView::worldToScreenScaled(math::Vec3f const& point) const
 inline math::Vec2f
 SingleView::worldToScreen(math::Vec3f const& point, int level) const
 {
-    math::Vec3f cp(this->worldToCam.mult(point,1.f));
+    math::Vec3f cp(this->worldToCam.mult(point, 1.f));
     math::Vec3f sp = this->img_pyramid->at(level).proj * cp;
 
     math::Vec2f res(sp[0] / sp[2] - 0.5f, sp[1] / sp[2] - 0.5f);

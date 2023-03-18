@@ -427,7 +427,7 @@ CascadeHashing::collect_features_from_buckets (
     size_t num_bucket_grps = bucket_grps_bucket_ids.size();
     for (size_t grp_idx = 0; grp_idx < num_bucket_grps; grp_idx++)
     {
-        uint8_t bucket_id = bucket_grps_bucket_ids[grp_idx][feature_id];
+        uint16_t bucket_id = bucket_grps_bucket_ids[grp_idx][feature_id];
         BucketFeatureIDs const& bucket_feature_ids = bucket_grps_feature_ids[grp_idx][bucket_id];
 
         for (size_t j = 0; j < bucket_feature_ids.size(); j++)

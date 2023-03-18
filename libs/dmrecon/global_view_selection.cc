@@ -65,7 +65,7 @@ GlobalViewSelection::benefitFromView(std::size_t i)
     SingleView::Ptr refV = views[settings.refViewNr];
     SingleView::Ptr tmpV = views[i];
 
-    std::vector<std::size_t> nFeatIDs = tmpV->getFeatureIndices();
+    std::vector<std::size_t> const& nFeatIDs = tmpV->getFeatureIndices();
 
     // Go over all features visible in view i and reference view
     float benefit = 0.f;

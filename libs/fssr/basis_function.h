@@ -67,8 +67,8 @@ fssr_weight (T const& scale, math::Vector<T, 3> const& pos,
 void
 evaluate (math::Vec3f const& pos, Sample const& sample,
     double* value, double* weight,
-    math::Vector<double, 3>* value_deriv,
-    math::Vector<double, 3>* weight_deriv);
+    math::Vec3d* value_deriv,
+    math::Vec3d* weight_deriv);
 
 /** Transforms 'pos' according to the samples position and normal. */
 math::Vec3f

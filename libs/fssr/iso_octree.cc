@@ -132,9 +132,9 @@ IsoOctree::sample_ifn (math::Vec3d const& voxel_pos)
     double total_weight = 0.0;
     double total_scale = 0.0;
     double total_color_weight = 0.0;
-    math::Vector<double, 3> total_value_deriv(0.0);
-    math::Vector<double, 3> total_weight_deriv(0.0);
-    math::Vector<double, 3> total_color(0.0);
+    math::Vec3d total_value_deriv(0.0);
+    math::Vec3d total_weight_deriv(0.0);
+    math::Vec3d total_color(0.0);
 
     for (std::size_t i = 0; i < samples.size(); ++i)
     {
@@ -144,7 +144,7 @@ IsoOctree::sample_ifn (math::Vec3d const& voxel_pos)
 
         /* Evaluate basis and weight function. */
         double value, weight;
-        math::Vector<double, 3> value_deriv, weight_deriv;
+        math::Vec3d value_deriv, weight_deriv;
         evaluate(voxel_pos, sample, &value, &weight,
             &value_deriv, &weight_deriv);
 

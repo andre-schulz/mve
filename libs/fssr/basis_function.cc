@@ -20,8 +20,8 @@ FSSR_NAMESPACE_BEGIN
 void
 evaluate (math::Vec3f const& pos, Sample const& sample,
     double* value, double* weight,
-    math::Vector<double, 3>* value_deriv,
-    math::Vector<double, 3>* weight_deriv)
+    math::Vec3d* value_deriv,
+    math::Vec3d* weight_deriv)
 {
     /* Rotate voxel position into the sample's LCS. */
     math::Matrix3f rot;

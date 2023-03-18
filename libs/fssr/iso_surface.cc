@@ -977,7 +977,7 @@ IsoSurface::compute_triangulation(IsoVertexVector const& isovertices,
     fssr::MinAreaTriangulation tri;
     for (std::size_t i = 0; i < polygons.size(); i++)
     {
-        std::vector<math::Vector<float, 3> > loop;
+        std::vector<math::Vec3f> loop;
         loop.resize(polygons[i].size());
         for (std::size_t j = 0; j < polygons[i].size(); ++j)
             loop[j] = verts[polygons[i][j]];

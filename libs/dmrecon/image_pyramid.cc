@@ -19,7 +19,7 @@ namespace
     int const MIN_IMAGE_DIM = 30;
 
     ImagePyramid::Ptr
-    buildPyramid(mve::View::Ptr view, std::string embeddingName)
+    buildPyramid(mve::View::Ptr view, std::string const& embeddingName)
     {
         ImagePyramid::Ptr pyramid(new ImagePyramid());
         ImagePyramid& levels = *pyramid;
@@ -54,7 +54,7 @@ namespace
 
     void
     ensureImages(ImagePyramid& levels, mve::View::Ptr view,
-        std::string embeddingName, int minLevel)
+        std::string const& embeddingName, int minLevel)
     {
         if (levels[minLevel].image != nullptr)
             return;
@@ -97,7 +97,7 @@ namespace
 
 ImagePyramid::ConstPtr
 ImagePyramidCache::get(mve::Scene::Ptr scene, mve::View::Ptr view,
-    std::string embeddingName, int minLevel)
+    std::string const& embeddingName, int minLevel)
 {
     std::lock_guard<std::mutex> lock(ImagePyramidCache::metadataMutex);
 

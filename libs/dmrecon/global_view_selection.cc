@@ -68,7 +68,7 @@ GlobalViewSelection::benefitFromView(std::size_t i)
     std::vector<std::size_t> nFeatIDs = tmpV->getFeatureIndices();
 
     // Go over all features visible in view i and reference view
-    float benefit = 0;
+    float benefit = 0.f;
     for (std::size_t k = 0; k < nFeatIDs.size(); ++k) {
         float score = 1.f;
         // Parallax with reference view
@@ -80,10 +80,10 @@ GlobalViewSelection::benefitFromView(std::size_t i)
         float mfp = refV->footPrintScaled(ftPos);
         float nfp = tmpV->footPrint(ftPos);
         float ratio = mfp / nfp;
-        if (ratio > 2.)
-            ratio = 2. / ratio;
-        else if (ratio > 1.)
-            ratio = 1.;
+        if (ratio > 2.f)
+            ratio = 2.f / ratio;
+        else if (ratio > 1.f)
+            ratio = 1.f;
         score *= ratio;
         // Parallax with other selected views that see the same feature
         IndexSet::const_iterator citV;

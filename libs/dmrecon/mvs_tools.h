@@ -34,7 +34,7 @@ void getXYZColorAtPos(mve::ByteImage const& img,
     PixelCoords const& imgPos, Samples* color);
 
 /** Computes the parallax between two views with respect to some 3D point p */
-float parallax(math::Vec3f p, mvs::SingleView::ConstPtr v1, mvs::SingleView::ConstPtr v2);
+float parallax(math::Vec3f const& p, mvs::SingleView::ConstPtr v1, mvs::SingleView::ConstPtr v2);
 
 /** Turns a parallax value (0 <= p <= 180) into a weight according
     to a bilateral Gaussian (see [Furukawa 2010] for details) */
@@ -43,7 +43,7 @@ float parallaxToWeight(float p);
 /* ------------------------- Implementation ----------------------- */
 
 inline float
-parallax(math::Vec3f p, mvs::SingleView::ConstPtr v1, mvs::SingleView::ConstPtr v2)
+parallax(math::Vec3f const& p, mvs::SingleView::ConstPtr v1, mvs::SingleView::ConstPtr v2)
 {
     math::Vec3f dir1 = (p - v1->camPos).normalized();
     math::Vec3f dir2 = (p - v2->camPos).normalized();

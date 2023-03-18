@@ -28,7 +28,7 @@ PatchSampler::PatchSampler(std::vector<SingleView::Ptr> const& _views,
     , dzJ(_dzJ)
     , success(views.size(), false)
 {
-    SingleView::Ptr refV(views[settings.refViewNr]);
+    SingleView::ConstPtr refV(views[settings.refViewNr]);
     mve::ByteImage::ConstPtr masterImg(refV->getScaledImg());
 
     offset = settings.filterWidth / 2;
@@ -65,7 +65,7 @@ void
 PatchSampler::fastColAndDeriv(std::size_t v, Samples& color, Samples& deriv)
 {
     success[v] = false;
-    SingleView::Ptr refV = views[settings.refViewNr];
+    SingleView::ConstPtr refV = views[settings.refViewNr];
 
     PixelCoords& imgPos = neighPosSamples[v];
     imgPos.resize(nrSamples);
@@ -273,7 +273,7 @@ PatchSampler::update(float newDepth, float newDzI, float newDzJ)
 void
 PatchSampler::computePatchPoints()
 {
-    SingleView::Ptr refV = views[settings.refViewNr];
+    SingleView::ConstPtr refV = views[settings.refViewNr];
 
     unsigned int count = 0;
     for (int j = topLeft[1]; j <= bottomRight[1]; ++j)
@@ -297,7 +297,7 @@ PatchSampler::computePatchPoints()
 void
 PatchSampler::computeMasterSamples()
 {
-    SingleView::Ptr refV = views[settings.refViewNr];
+    SingleView::ConstPtr refV = views[settings.refViewNr];
     mve::ByteImage::ConstPtr img(refV->getScaledImg());
 
     /* draw color samples from image and compute mean color */
@@ -347,7 +347,7 @@ PatchSampler::computeMasterSamples()
 void
 PatchSampler::computeNeighColorSamples(std::size_t v)
 {
-    SingleView::Ptr refV = views[settings.refViewNr];
+    SingleView::ConstPtr refV = views[settings.refViewNr];
 
     Samples & color = neighColorSamples[v];
     PixelCoords & imgPos = neighPosSamples[v];

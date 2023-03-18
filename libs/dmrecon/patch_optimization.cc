@@ -113,7 +113,7 @@ PatchOptimization::computeColorScale()
 float
 PatchOptimization::computeConfidence()
 {
-    SingleView::Ptr refV = views[settings.refViewNr];
+    SingleView::ConstPtr refV = views[settings.refViewNr];
     if (!status.converged)
         return 0.f;
 

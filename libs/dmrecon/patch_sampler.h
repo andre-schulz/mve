@@ -87,7 +87,7 @@ public:
     void update(float newDepth, float newDzI, float newDzJ);
 
     /**  */
-    float varInMasterPatch();
+    float varInMasterPatch() const;
 
 
 private:
@@ -180,7 +180,7 @@ PatchSampler::getNrSamples() const
 }
 
 inline float
-PatchSampler::varInMasterPatch()
+PatchSampler::varInMasterPatch() const
 {
     return sqrDevX / (3.f * (float) nrSamples);
 }

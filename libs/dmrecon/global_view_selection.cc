@@ -62,8 +62,8 @@ GlobalViewSelection::performVS()
 float
 GlobalViewSelection::benefitFromView(std::size_t i)
 {
-    SingleView::Ptr refV = views[settings.refViewNr];
-    SingleView::Ptr tmpV = views[i];
+    SingleView::ConstPtr refV = views[settings.refViewNr];
+    SingleView::ConstPtr tmpV = views[i];
 
     std::vector<std::size_t> const& nFeatIDs = tmpV->getFeatureIndices();
 

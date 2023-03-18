@@ -68,7 +68,7 @@ namespace
         for (double* iter = A->begin(); iter != A->end(); )
         {
             double* iter_backup = iter;
-            math::Matrix<double, 3, 3> rot;
+            math::Matrix3d rot;
             for (int i = 0; i < 9; ++i)
                 rot[i] = *(iter++);
 

@@ -145,7 +145,7 @@ public:
         /** The orientation of the image keypoint in [0, 2PI]. */
         float orientation;
         /** The descriptor data, elements are unsigned in [0.0, 1.0]. */
-        math::Vector<float, 128> data;
+        math::Vec128f data;
     };
 
 public:

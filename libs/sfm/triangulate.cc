@@ -16,7 +16,7 @@ SFM_NAMESPACE_BEGIN
 
 /* ---------------- Low-level triangulation solver ---------------- */
 
-math::Vector<double, 3>
+math::Vec3d
 triangulate_match (Correspondence2D2D const& match,
     CameraPose const& pose1, CameraPose const& pose2)
 {
@@ -25,7 +25,7 @@ triangulate_match (Correspondence2D2D const& match,
     pose1.fill_p_matrix(&P1);
     pose2.fill_p_matrix(&P2);
 
-    math::Matrix<double, 4, 4> A;
+    math::Matrix4d A;
     for (int i = 0; i < 4; ++i)
     {
         A(0, i) = match.p1[0] * P1(2, i) - P1(0, i);
@@ -34,13 +34,13 @@ triangulate_match (Correspondence2D2D const& match,
         A(3, i) = match.p2[1] * P2(2, i) - P2(1, i);
     }
 
-    math::Matrix<double, 4, 4> V;
+    math::Matrix4d V;
     math::matrix_svd<double, 4, 4>(A, nullptr, nullptr, &V);
-    math::Vector<double, 4> x = V.col(3);
-    return math::Vector<double, 3>(x[0] / x[3], x[1] / x[3], x[2] / x[3]);
+    math::Vec4d x = V.col(3);
+    return math::Vec3d(x[0] / x[3], x[1] / x[3], x[2] / x[3]);
 }
 
-math::Vector<double, 3>
+math::Vec3d
 triangulate_track (std::vector<math::Vec2f> const& pos,
     std::vector<CameraPose const*> const& poses)
 {
@@ -63,22 +63,22 @@ triangulate_track (std::vector<math::Vec2f> const& pos,
     }
 
     /* Compute SVD. */
-    math::Matrix<double, 4, 4> mat_v;
+    math::Matrix4d mat_v;
     math::matrix_svd<double>(&A[0], 2 * poses.size(), 4,
         nullptr, nullptr, mat_v.begin());
 
     /* Consider the last column of V and extract 3D point. */
-    math::Vector<double, 4> x = mat_v.col(3);
-    return math::Vector<double, 3>(x[0] / x[3], x[1] / x[3], x[2] / x[3]);
+    math::Vec4d x = mat_v.col(3);
+    return math::Vec3d(x[0] / x[3], x[1] / x[3], x[2] / x[3]);
 }
 
 bool
 is_consistent_pose (Correspondence2D2D const& match,
     CameraPose const& pose1, CameraPose const& pose2)
 {
-    math::Vector<double, 3> x = triangulate_match(match, pose1, pose2);
-    math::Vector<double, 3> x1 = pose1.R * x + pose1.t;
-    math::Vector<double, 3> x2 = pose2.R * x + pose2.t;
+    math::Vec3d x = triangulate_match(match, pose1, pose2);
+    math::Vec3d x1 = pose1.R * x + pose1.t;
+    math::Vec3d x2 = pose2.R * x + pose2.t;
     return x1[2] > 0.0f && x2[2] > 0.0f;
 }
 

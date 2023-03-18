@@ -107,7 +107,7 @@ main (int argc, char** argv)
         << img2_desc.size() << " descriptors." << std::endl;
 
     /* Prepare matching data. */
-    util::AlignedMemory<math::Vector<float, 128>> descr1, descr2;
+    util::AlignedMemory<math::Vec128f> descr1, descr2;
     descr1.resize(img1_desc.size());
     descr2.resize(img2_desc.size());
     float * data_ptr = descr1.data()->begin();

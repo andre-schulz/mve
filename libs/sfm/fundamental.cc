@@ -84,8 +84,8 @@ fundamental_8_point (Eight2DPoints const& points_view_1,
     math::Matrix<double, 8, 9> A;
     for (int i = 0; i < 8; ++i)
     {
-        math::Vector<double, 3> p1 = points_view_1.col(i);
-        math::Vector<double, 3> p2 = points_view_2.col(i);
+        math::Vec3d p1 = points_view_1.col(i);
+        math::Vec3d p2 = points_view_2.col(i);
         A(i, 0) = p2[0] * p1[0];
         A(i, 1) = p2[0] * p1[1];
         A(i, 2) = p2[0] * 1.0;
@@ -119,7 +119,7 @@ enforce_fundamental_constraints (FundamentalMatrix* matrix)
      * used: F' = USV*, F = UDV* where D = diag(s1, s2, 0) and s1 and s2
      * are the largest and second largest eigenvalues of F.
      */
-    math::Matrix<double, 3, 3> U, S, V;
+    math::Matrix3d U, S, V;
     math::matrix_svd(*matrix, &U, &S, &V);
     S(2, 2) = 0.0;
     *matrix = U * S * V.transposed();
@@ -135,7 +135,7 @@ enforce_essential_constraints (EssentialMatrix* matrix)
      * used: F' = USV*, F = UDV* where D = diag(s, s, 0), s = (s1 + s2) / 2
      * and s1 and s2 are the largest and second largest eigenvalues of F.
      */
-    math::Matrix<double, 3, 3> U, S, V;
+    math::Matrix3d U, S, V;
     math::matrix_svd(*matrix, &U, &S, &V);
     double avg = (S(0, 0) + S(0, 1)) / 2.0;
     S(0, 0) = avg;
@@ -156,12 +156,12 @@ pose_from_essential (EssentialMatrix const& matrix,
      * Details can be found in [Hartley, Zisserman, Sect. 9.6.1].
      */
 
-    math::Matrix<double, 3, 3> W(0.0);
+    math::Matrix3d W(0.0);
     W(0, 1) = -1.0; W(1, 0) = 1.0; W(2, 2) = 1.0;
-    math::Matrix<double, 3, 3> Wt(0.0);
+    math::Matrix3d Wt(0.0);
     Wt(0, 1) = 1.0; Wt(1, 0) = -1.0; Wt(2, 2) = 1.0;
 
-    math::Matrix<double, 3, 3> U, S, V;
+    math::Matrix3d U, S, V;
     math::matrix_svd(matrix, &U, &S, &V);
 
     // This seems to ensure that det(R) = 1 (instead of -1).

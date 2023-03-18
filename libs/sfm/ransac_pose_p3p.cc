@@ -25,7 +25,7 @@ RansacPoseP3P::RansacPoseP3P (Options const& options)
 
 void
 RansacPoseP3P::estimate (Correspondences2D3D const& corresp,
-    math::Matrix<double, 3, 3> const& k_matrix, Result* result) const
+    math::Matrix3d const& k_matrix, Result* result) const
 {
     if (this->opts.verbose_output)
     {
@@ -35,7 +35,7 @@ RansacPoseP3P::estimate (Correspondences2D3D const& corresp,
     }
 
     /* Pre-compute inverse K matrix to compute directions from corresp. */
-    math::Matrix<double, 3, 3> inv_k_matrix = math::matrix_inverse(k_matrix);
+    math::Matrix3d inv_k_matrix = math::matrix_inverse(k_matrix);
     std::atomic<int> num_iterations;
 
 #pragma omp parallel
@@ -79,7 +79,7 @@ RansacPoseP3P::estimate (Correspondences2D3D const& corresp,
 
 void
 RansacPoseP3P::compute_p3p (Correspondences2D3D const& corresp,
-    math::Matrix<double, 3, 3> const& inv_k_matrix,
+    math::Matrix3d const& inv_k_matrix,
     PutativePoses* poses) const
 {
     if (corresp.size() < 3)
@@ -104,7 +104,7 @@ RansacPoseP3P::compute_p3p (Correspondences2D3D const& corresp,
 
 void
 RansacPoseP3P::find_inliers (Correspondences2D3D const& corresp,
-    math::Matrix<double, 3, 3> const& k_matrix,
+    math::Matrix3d const& k_matrix,
     Pose const& pose, std::vector<int>* inliers) const
 {
     inliers->resize(0);

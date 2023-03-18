@@ -91,7 +91,7 @@ public:
         /** The orientation of the image keypoint in [-PI, PI]. */
         float orientation;
         /** The descriptor data, elements are signed in [-1.0, 1.0]. */
-        math::Vector<float, 64> data;
+        math::Vec64f data;
     };
 
 public:

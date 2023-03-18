@@ -57,8 +57,8 @@
 SFM_NAMESPACE_BEGIN
 
 typedef math::Matrix<double, 3, 8> Eight2DPoints;
-typedef math::Matrix<double, 3, 3> FundamentalMatrix;
-typedef math::Matrix<double, 3, 3> EssentialMatrix;
+typedef math::Matrix3d FundamentalMatrix;
+typedef math::Matrix3d EssentialMatrix;
 
 /**
  * Algorithm to compute the fundamental or essential matrix from image

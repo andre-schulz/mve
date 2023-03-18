@@ -73,7 +73,7 @@ public:
     explicit RansacPoseP3P (Options const& options);
 
     void estimate (Correspondences2D3D const& corresp,
-        math::Matrix<double, 3, 3> const& k_matrix,
+        math::Matrix3d const& k_matrix,
         Result* result) const;
 
 private:
@@ -82,11 +82,11 @@ private:
 
 private:
     void compute_p3p (Correspondences2D3D const& corresp,
-        math::Matrix<double, 3, 3> const& inv_k_matrix,
+        math::Matrix3d const& inv_k_matrix,
         PutativePoses* poses) const;
 
     void find_inliers (Correspondences2D3D const& corresp,
-        math::Matrix<double, 3, 3> const& k_matrix,
+        math::Matrix3d const& k_matrix,
         Pose const& pose, std::vector<int>* inliers) const;
 
 private:

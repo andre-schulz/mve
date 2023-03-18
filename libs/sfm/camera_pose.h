@@ -50,14 +50,14 @@ public:
     /** Returns the focal length as average of x and y focal length. */
     double get_focal_length (void) const;
     /** Returns the camera position (requires valid camera). */
-    void fill_camera_pos (math::Vector<double, 3>* camera_pos) const;
+    void fill_camera_pos (math::Vec3d* camera_pos) const;
     /** Returns true if K matrix is valid (non-zero focal length). */
     bool is_valid (void) const;
 
 public:
-    math::Matrix<double, 3, 3> K;
-    math::Matrix<double, 3, 3> R;
-    math::Vector<double, 3> t;
+    math::Matrix3d K;
+    math::Matrix3d R;
+    math::Vec3d t;
 };
 
 /* ------------------------ Implementation ------------------------ */
@@ -80,7 +80,7 @@ CameraPose::init_canonical_form (void)
 inline void
 CameraPose::fill_p_matrix (math::Matrix<double, 3, 4>* P) const
 {
-    math::Matrix<double, 3, 3> KR = this->K * this->R;
+    math::Matrix3d KR = this->K * this->R;
     math::Matrix<double, 3, 1> Kt(*(this->K * this->t));
     *P = KR.hstack(Kt);
 }
@@ -101,7 +101,7 @@ CameraPose::get_focal_length (void) const
 }
 
 inline void
-CameraPose::fill_camera_pos (math::Vector<double, 3>* camera_pos) const
+CameraPose::fill_camera_pos (math::Vec3d* camera_pos) const
 {
     *camera_pos = -this->R.transposed().mult(this->t);
 }

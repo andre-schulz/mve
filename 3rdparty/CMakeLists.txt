@@ -63,12 +63,6 @@ set(GTEST_FILENAME "release-1.8.1.tar.gz")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
 set(GTEST_SHA256 "9bf1fe5182a604b4135edc1a425ae356c9ad15e9b23f9f12a02e80184c3a249c")
 
-set(PATCHES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/patches")
-
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
-
 ExternalProject_Add(libjpeg-turbo
     PREFIX build/libjpeg-turbo
     URL ${LIBJPEG_TURBO_URL}

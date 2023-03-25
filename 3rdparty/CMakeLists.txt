@@ -25,7 +25,7 @@ execute_process(COMMAND powershell -command $PSVersionTable.PSVersion.Major
 execute_process(COMMAND powershell -command $PSVersionTable.PSVersion.Minor
     OUTPUT_VARIABLE POWERSHELL_VERSION_MINOR OUTPUT_STRIP_TRAILING_WHITESPACE)
 set(POWERSHELL_VERSION ${POWERSHELL_VERSION_MAJOR}.${POWERSHELL_VERSION_MINOR})
-if(POWERSHELL_VERSION VERSION_LESS 5.0)
+if(NOT PERL_FOUND AND POWERSHELL_VERSION VERSION_LESS 5.0)
     message(WARNING "Qt5 will NOT be built because neither Perl nor PowerShell >= 5.0 were found!"
         " If you don't want to build UMVE, you can ignore this warning."
         " If you want to build UMVE, please install either Perl or update your PowerShell.")

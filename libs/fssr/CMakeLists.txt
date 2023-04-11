@@ -8,4 +8,5 @@ target_link_libraries(mve_fssr
         mve_math
     PRIVATE
         mve_util
+        OpenMP::OpenMP_CXX
 )

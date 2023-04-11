@@ -15,9 +15,6 @@ set(UMVE_LIBS
     Qt5::OpenGL
     Qt5::Svg
     Qt5::Widgets
-    ${PNG_LIBRARIES}
-    ${JPEG_LIBRARIES}
-    ${TIFF_LIBRARIES}
     ${OPENGL_LIBRARIES}
     mve_dmrecon
     mve

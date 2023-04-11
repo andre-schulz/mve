@@ -45,8 +45,7 @@ else()
 endif()
 include(CPack)
 
-find_package(OpenMP REQUIRED)
-add_compile_options(${OpenMP_CXX_FLAGS})
+find_package(OpenMP REQUIRED COMPONENTS CXX)
 
 include_directories(libs)
 

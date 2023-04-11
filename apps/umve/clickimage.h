@@ -69,7 +69,7 @@ ClickImage::set_scale_factor (double factor)
     if (this->scale_factor == 1.0)
         this->adjustSize();
     else
-        this->resize(this->scale_factor * this->pixmap()->size());
+        this->resize(this->scale_factor * this->pixmap(Qt::ReturnByValue).size());
 }
 
 inline void
@@ -102,7 +102,7 @@ ClickImage::mouseMoveEvent (QMouseEvent* event)
 inline void
 ClickImage::wheelEvent (QWheelEvent* event)
 {
-    QPoint const& pnt = this->get_image_coordinates(event->pos());
+    QPoint const& pnt = this->get_image_coordinates(event->position().toPoint());
     emit this->mouse_zoomed(pnt.x(), pnt.y(), event);
 }
 
@@ -111,7 +111,7 @@ ClickImage::get_image_coordinates (QPoint pnt) const
 {
     if (this->hasScaledContents())
     {
-        QSize ps(this->pixmap()->size());
+        QSize ps(this->pixmap(Qt::ReturnByValue).size());
         QSize ws(this->size());
 
         float scale_x = (float)ps.width() / (float)ws.width();

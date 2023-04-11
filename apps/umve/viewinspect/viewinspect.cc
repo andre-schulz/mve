@@ -229,7 +229,7 @@ ViewInspect::show_details (bool show)
 void
 ViewInspect::update_actions (void)
 {
-    bool active = this->scroll_image->get_pixmap() != nullptr;
+    bool active = !!this->scroll_image->get_pixmap();
     this->action_zoom_fit->setEnabled(active);
     this->action_zoom_in->setEnabled(active);
     this->action_zoom_out->setEnabled(active);
@@ -700,7 +700,7 @@ ViewInspect::on_ply_export (void)
 void
 ViewInspect::on_image_export (void)
 {
-    if (!this->scroll_image->get_image()->pixmap())
+    if (!this->scroll_image->get_image()->pixmap(Qt::ReturnByValue))
     {
         QMessageBox::critical(this, "Cannot save image", "No such image");
         return;

@@ -46,7 +46,7 @@ public:
     ScrollImage (void);
 
     void set_pixmap (QPixmap const& pixmap);
-    QPixmap const* get_pixmap (void) const;
+    QPixmap get_pixmap (void) const;
     ClickImage* get_image (void);
 
     void set_auto_scale (bool value);
@@ -116,10 +116,10 @@ ScrollImage::set_scale (double scale)
     return this->image->set_scale_factor(scale);
 }
 
-inline QPixmap const*
+inline QPixmap
 ScrollImage::get_pixmap (void) const
 {
-    return this->image->pixmap();
+    return this->image->pixmap(Qt::ReturnByValue);
 }
 
 inline ClickImage*

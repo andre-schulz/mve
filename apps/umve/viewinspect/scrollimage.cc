@@ -54,7 +54,7 @@ ScrollImage::update_image_size (void)
 void
 ScrollImage::max_image_size (void)
 {
-    QSize imgsize(this->image->pixmap()->size());
+    QSize imgsize(this->image->pixmap(Qt::ReturnByValue).size());
     QSize newsize = imgsize.scaled(this->maximumViewportSize(),
         Qt::KeepAspectRatio);
     this->image->set_scale_factor(static_cast<float>(newsize.width())
@@ -83,7 +83,7 @@ ScrollImage::resizeEvent (QResizeEvent* event)
     //std::cout << "Resize Event: " << event->size().width() << "x"
     //    << event->size().height() << std::endl;
 
-    if (this->scale_contents && this->image->pixmap())
+    if (this->scale_contents && !!this->image->pixmap(Qt::ReturnByValue))
         this->max_image_size();
 }
 
@@ -119,12 +119,12 @@ ScrollImage::mouse_zoomed (int x, int y, QWheelEvent* event)
         return;
     }
     QPoint old_pnt(x, y);
-    if (event->delta() > 0)
+    if (event->angleDelta().y() > 0)
         this->set_scale(this->get_scale() * MOUSE_ZOOM_IN_FACTOR);
     else
         this->set_scale(this->get_scale() * MOUSE_ZOOM_OUT_FACTOR);
 
-    QPoint new_pnt = this->image->get_image_coordinates(event->pos());
+    QPoint new_pnt = this->image->get_image_coordinates(event->position().toPoint());
     QPoint diff = (old_pnt - new_pnt) * this->get_scale();
     this->move_scrollbar(this->horizontalScrollBar(), diff.x());
     this->move_scrollbar(this->verticalScrollBar(), diff.y());
@@ -151,10 +151,10 @@ ScrollImage::move_scrollbar (QScrollBar* bar, int delta)
 void
 ScrollImage::save_image (std::string const& filename)
 {
-    QPixmap const* pm = this->image->pixmap();
+    QPixmap pm = this->image->pixmap(Qt::ReturnByValue);
     if (!pm)
         throw std::runtime_error("No image set");
-    bool ret = pm->save(filename.c_str());
+    bool ret = pm.save(filename.c_str());
     if (!ret)
         throw std::runtime_error("Unable to save image");
 }

@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QProgressDialog>
 #include <QApplication>
+#include <QAbstractEventDispatcher>
 
 #include "util/file_system.h"
 #include "mve/mesh_io_ply.h"
@@ -549,7 +550,7 @@ BatchGenerateThumbs::on_generate (void)
         return;
 
     this->setDisabled(true);
-    while (QApplication::hasPendingEvents())
+    while (QApplication::eventDispatcher()->hasPendingEvents())
         QApplication::processEvents();
 
     std::string embedding_name = this->embedding_name.text().toStdString();

@@ -159,14 +159,14 @@ GLWidget::wheelEvent (QWheelEvent* event)
 {
     this->makeCurrent();
     ogl::MouseEvent e;
-    if (event->delta() < 0)
+    if (event->angleDelta().y() < 0)
         e.type = ogl::MOUSE_EVENT_WHEEL_DOWN;
     else
         e.type = ogl::MOUSE_EVENT_WHEEL_UP;
     e.button = ogl::MOUSE_BUTTON_NONE;
     e.button_mask = event->buttons();
-    e.x = event->x() * this->device_pixel_ratio;
-    e.y = event->y() * this->device_pixel_ratio;
+    e.x = event->position().x() * this->device_pixel_ratio;
+    e.y = event->position().y() * this->device_pixel_ratio;
     this->context->mouse_event(e);
     this->repaint_async();
 }

@@ -147,7 +147,7 @@ SceneOverview::add_view_to_layout (std::size_t id, mve::View::Ptr view)
     QListWidgetItem* item = new QListWidgetItem(icon,
         tr("%1\n%2").arg(name, images));
     if (!cam_valid)
-        item->setBackgroundColor(QColor(255, 221, 221)); // #ffdddd
+        item->setBackground(QColor(255, 221, 221)); // #ffdddd
     item->setData(Qt::UserRole, (int)id);
     this->viewlist->addItem(item);
 }

@@ -7,5 +7,7 @@ target_link_libraries(mve_sfm
         mve
         mve_math
         mve_util
+    PRIVATE
+        OpenMP::OpenMP_CXX
 )
 

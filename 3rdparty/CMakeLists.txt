@@ -47,9 +47,9 @@ set(ZLIB_FILENAME "zlib-1.2.13.tar.xz")
 set(ZLIB_URL "https://www.zlib.net/${ZLIB_FILENAME}")
 set(ZLIB_SHA256 "d14c38e313afc35a9a8760dadf26042f51ea0f5d154b0630a31da0540107fb98")
 
-set(LIBTIFF_FILENAME "tiff-4.2.0.tar.gz")
-set(LIBTIFF_URL "http://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
-set(LIBTIFF_SHA256 "eb0484e568ead8fa23b513e9b0041df7e327f4ee2d22db5a533929dfc19633cb")
+set(LIBTIFF_FILENAME "tiff-4.5.0.tar.xz")
+set(LIBTIFF_URL "https://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
+set(LIBTIFF_SHA256 "dafac979c5e7b6c650025569c5a4e720995ba5f17bc17e6276d1f12427be267c")
 
 set(GLEW_FILENAME "glew-2.2.0.tgz")
 set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.2.0/${GLEW_FILENAME}")
@@ -113,7 +113,10 @@ ExternalProject_Add(libtiff
         -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         -Dcxx:BOOL=OFF
         -Djpeg:BOOL=OFF
-        -Dold-jpeg:BOOL=OFF
+        -Dtiff-contrib:BOOL=OFF
+        -Dtiff-docs:BOOL=OFF
+        -Dtiff-tests:BOOL=OFF
+        -Dtiff-tools:BOOL=OFF
 )
 
 ExternalProject_Add(glew

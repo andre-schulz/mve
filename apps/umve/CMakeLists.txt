@@ -15,7 +15,7 @@ set(UMVE_LIBS
     Qt5::OpenGL
     Qt5::Svg
     Qt5::Widgets
-    ${OPENGL_LIBRARIES}
+    OpenGL::GL
     mve_dmrecon
     mve
     mve_ogl

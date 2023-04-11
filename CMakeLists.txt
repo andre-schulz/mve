@@ -38,7 +38,6 @@ if(WIN32)
     endif()
 
     set(CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty")
-    set(JPEG_NAMES "libjpeg")
     set(CPACK_GENERATOR "ZIP")
 else()
     set(CPACK_GENERATOR "TGZ")

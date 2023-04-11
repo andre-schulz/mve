@@ -55,9 +55,9 @@ set(GLEW_FILENAME "glew-2.2.0.tgz")
 set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.2.0/${GLEW_FILENAME}")
 set(GLEW_SHA256 "d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1")
 
-set(QT5_FILENAME "qt-everywhere-src-5.15.2.tar.xz")
-set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.2/single/${QT5_FILENAME}")
-set(QT5_SHA256 "3a530d1b243b5dec00bc54937455471aaa3e56849d2593edb8ded07228202240")
+set(QT5_FILENAME "qt-everywhere-opensource-src-5.15.8.tar.xz")
+set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.8/single/${QT5_FILENAME}")
+set(QT5_SHA256 "776a9302c336671f9406a53bd30b8e36f825742b2ec44a57c08217bff0fa86b9")
 
 set(GTEST_FILENAME "release-1.12.1.tar.gz")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
@@ -145,11 +145,11 @@ if(PERL_FOUND OR POWERSHELL_VERSION VERSION_GREATER_EQUAL 5.0)
                 -no-accessibility -no-dbus -no-feature-network
                 -no-feature-printer -no-feature-sql -no-feature-testlib
                 -skip qt3d -skip qtactiveqt -skip qtandroidextras
-                -skip qtcanvas3d -skip qtcharts -skip qtconnectivity
+                -skip qtcharts -skip qtconnectivity
                 -skip qtdatavis3d -skip qtdeclarative -skip qtdoc -skip qtgamepad
                 -skip qtgraphicaleffects -skip qtlocation -skip qtlottie
                 -skip qtmacextras -skip qtmultimedia -skip qtnetworkauth
-                -skip qtpurchasing -skip qtquickcontrols -skip quickcontrols2
+                -skip qtpurchasing -skip qtquick3d -skip qtquickcontrols -skip quickcontrols2
                 -skip qtquicktimeline -skip qtremoteobjects -skip qtscript
                 -skip qtscxml -skip qtsensors -skip qtserialbus -skip qtserialport
                 -skip qtspeech -skip qttools -skip qttranslations

@@ -55,9 +55,9 @@ set(GLEW_FILENAME "glew-2.2.0.tgz")
 set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.2.0/${GLEW_FILENAME}")
 set(GLEW_SHA256 "d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1")
 
-set(QT5_FILENAME "qt-everywhere-opensource-src-5.15.8.tar.xz")
-set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.8/single/${QT5_FILENAME}")
-set(QT5_SHA256 "776a9302c336671f9406a53bd30b8e36f825742b2ec44a57c08217bff0fa86b9")
+set(QT5_FILENAME "qt-everywhere-opensource-src-5.15.11.tar.xz")
+set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.11/single/${QT5_FILENAME}")
+set(QT5_SHA256 "7426b1eaab52ed169ce53804bdd05dfe364f761468f888a0f15a308dc1dc2951")
 
 set(GTEST_FILENAME "release-1.12.1.tar.gz")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")

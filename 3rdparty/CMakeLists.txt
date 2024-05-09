@@ -43,9 +43,9 @@ set(LIBPNG_FILENAME "libpng-1.6.40.tar.xz")
 set(LIBPNG_URL "https://download.sourceforge.net/libpng/libpng16/1.6.40/${LIBPNG_FILENAME}")
 set(LIBPNG_SHA256 "535b479b2467ff231a3ec6d92a525906fb8ef27978be4f66dbe05d3f3a01b3a1")
 
-set(ZLIB_FILENAME "zlib-1.3.tar.xz")
+set(ZLIB_FILENAME "zlib-1.3.1.tar.xz")
 set(ZLIB_URL "https://www.zlib.net/${ZLIB_FILENAME}")
-set(ZLIB_SHA256 "8a9ba2898e1d0d774eca6ba5b4627a11e5588ba85c8851336eb38de4683050a7")
+set(ZLIB_SHA256 "38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32")
 
 set(LIBTIFF_FILENAME "tiff-4.6.0.tar.xz")
 set(LIBTIFF_URL "https://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")

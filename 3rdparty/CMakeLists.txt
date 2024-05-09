@@ -35,9 +35,9 @@ if(NOT PERL_FOUND AND POWERSHELL_VERSION VERSION_LESS 5.0)
         " If you want to build UMVE, please install either Perl or update your PowerShell.")
 endif()
 
-set(LIBJPEG_TURBO_FILENAME "libjpeg-turbo-3.0.1.tar.gz")
-set(LIBJPEG_TURBO_URL "https://download.sourceforge.net/project/libjpeg-turbo/3.0.1/${LIBJPEG_TURBO_FILENAME}")
-set(LIBJPEG_TURBO_SHA256 "22429507714ae147b3acacd299e82099fce5d9f456882fc28e252e4579ba2a75")
+set(LIBJPEG_TURBO_FILENAME "libjpeg-turbo-3.0.3.tar.gz")
+set(LIBJPEG_TURBO_URL "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/${LIBJPEG_TURBO_FILENAME}")
+set(LIBJPEG_TURBO_SHA256 "343e789069fc7afbcdfe44dbba7dbbf45afa98a15150e079a38e60e44578865d")
 
 set(LIBPNG_FILENAME "libpng-1.6.40.tar.xz")
 set(LIBPNG_URL "https://download.sourceforge.net/libpng/libpng16/1.6.40/${LIBPNG_FILENAME}")

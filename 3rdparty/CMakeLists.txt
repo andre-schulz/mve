@@ -39,9 +39,9 @@ set(LIBJPEG_TURBO_FILENAME "libjpeg-turbo-3.0.3.tar.gz")
 set(LIBJPEG_TURBO_URL "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/${LIBJPEG_TURBO_FILENAME}")
 set(LIBJPEG_TURBO_SHA256 "343e789069fc7afbcdfe44dbba7dbbf45afa98a15150e079a38e60e44578865d")
 
-set(LIBPNG_FILENAME "libpng-1.6.40.tar.xz")
-set(LIBPNG_URL "https://download.sourceforge.net/libpng/libpng16/1.6.40/${LIBPNG_FILENAME}")
-set(LIBPNG_SHA256 "535b479b2467ff231a3ec6d92a525906fb8ef27978be4f66dbe05d3f3a01b3a1")
+set(LIBPNG_FILENAME "libpng-1.6.43.tar.xz")
+set(LIBPNG_URL "https://download.sourceforge.net/libpng/libpng16/1.6.43/${LIBPNG_FILENAME}")
+set(LIBPNG_SHA256 "6a5ca0652392a2d7c9db2ae5b40210843c0bbc081cbd410825ab00cc59f14a6c")
 
 set(ZLIB_FILENAME "zlib-1.3.1.tar.xz")
 set(ZLIB_URL "https://www.zlib.net/${ZLIB_FILENAME}")

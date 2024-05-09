@@ -55,9 +55,9 @@ set(GLEW_FILENAME "glew-2.2.0.tgz")
 set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.2.0/${GLEW_FILENAME}")
 set(GLEW_SHA256 "d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1")
 
-set(QT5_FILENAME "qt-everywhere-opensource-src-5.15.11.tar.xz")
-set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.11/single/${QT5_FILENAME}")
-set(QT5_SHA256 "7426b1eaab52ed169ce53804bdd05dfe364f761468f888a0f15a308dc1dc2951")
+set(QT5_FILENAME "qt-everywhere-opensource-src-5.15.13.tar.xz")
+set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.13/single/${QT5_FILENAME}")
+set(QT5_MD5 "1a0d6a02a068e0cb14592093506cf5ed")
 
 set(GTEST_FILENAME "release-1.12.1.tar.gz")
 set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
@@ -136,7 +136,7 @@ if(PERL_FOUND OR POWERSHELL_VERSION VERSION_GREATER_EQUAL 5.0)
     ExternalProject_Add(qt5
         PREFIX build/qt5
         URL ${QT5_URL}
-        URL_HASH SHA256=${QT5_SHA256}
+        URL_HASH MD5=${QT5_MD5}
         INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}
         CONFIGURE_COMMAND
             cmd /C configure -prefix "<INSTALL_DIR>" -debug-and-release -opensource

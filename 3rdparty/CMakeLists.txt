@@ -47,9 +47,9 @@ set(ZLIB_FILENAME "zlib-1.3.1.tar.xz")
 set(ZLIB_URL "https://www.zlib.net/${ZLIB_FILENAME}")
 set(ZLIB_SHA256 "38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32")
 
-set(LIBTIFF_FILENAME "tiff-4.6.0.tar.xz")
+set(LIBTIFF_FILENAME "tiff-4.7.0.tar.xz")
 set(LIBTIFF_URL "https://download.osgeo.org/libtiff/${LIBTIFF_FILENAME}")
-set(LIBTIFF_SHA256 "e178649607d1e22b51cf361dd20a3753f244f022eefab1f2f218fc62ebaf87d2")
+set(LIBTIFF_SHA256 "273a0a73b1f0bed640afee4a5df0337357ced5b53d3d5d1c405b936501f71017")
 
 set(GLEW_FILENAME "glew-2.2.0.tgz")
 set(GLEW_URL "https://downloads.sourceforge.net/project/glew/glew/2.2.0/${GLEW_FILENAME}")

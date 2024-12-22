@@ -59,9 +59,9 @@ set(QT5_FILENAME "qt-everywhere-opensource-src-5.15.16.tar.xz")
 set(QT5_URL "https://download.qt.io/official_releases/qt/5.15/5.15.16/single/${QT5_FILENAME}")
 set(QT5_MD5 "2a25d4e90abd05284bf5bb01365c9b44")
 
-set(GTEST_FILENAME "release-1.12.1.tar.gz")
-set(GTEST_URL "https://github.com/google/googletest/archive/${GTEST_FILENAME}")
-set(GTEST_SHA256 "81964fe578e9bd7c94dfdb09c8e4d6e6759e19967e397dbea48d1c10e45d0df2")
+set(GTEST_FILENAME "googletest-1.15.2.tar.gz")
+set(GTEST_URL "https://github.com/google/googletest/releases/download/v1.15.2/${GTEST_FILENAME}")
+set(GTEST_SHA256 "7b42b4d6ed48810c5362c265a17faebe90dc2373c885e5216439d37927f02926")
 
 ExternalProject_Add(libjpeg-turbo
     PREFIX build/libjpeg-turbo
